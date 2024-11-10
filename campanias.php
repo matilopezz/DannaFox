@@ -16,7 +16,7 @@
     <?php include 'includes/navbar.php'; ?> <!-- IMPORT DE NAVBAR -->
     <div class="container">
         <h2>CAMPAÑAS:</h2>
-        <button class="btn btn-primary">Añadir Cliente</button>
+        <button class="btn btn-primary" onclick="window.location.href='crearcampania.php'">Añadir Campaña</button>
         <input type="text" placeholder="Buscar Cliente" class="form-control" style="width: 200px; display: inline-block; margin-left: 20px;">
 
         <table class="table table-bordered mt-4">

@@ -1,10 +1,10 @@
 <?php
 // clientes.php
-include 'includes/db_connection.php'; // Incluir conexión a DB
+// include 'includes/db_connection.php'; // Import conexión a DB
 
 // 
-$sql = "SELECT nombre, apellido, cuil_cuit, telefono FROM clientes";
-$result = $conn->query($sql);
+// $sql = "SELECT nombre, apellido, cuil_cuit, telefono FROM clientes";
+// $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,7 +20,7 @@ $result = $conn->query($sql);
     <?php include 'includes/navbar.php'; ?> <!-- IMPORT DE NAVBAR -->
     <div class="container">
         <h2>CLIENTES:</h2>
-        <button class="btn btn-primary">Añadir Cliente</button>
+        <button class="btn btn-primary" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
         <input type="text" placeholder="Buscar Cliente" class="form-control" style="width: 200px; display: inline-block; margin-left: 20px;">
 
         <table class="table table-bordered mt-4">
@@ -35,22 +35,22 @@ $result = $conn->query($sql);
             </thead>
             <tbody>
                 <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row['nombre'] . "</td>";
-                        echo "<td>" . $row['apellido'] . "</td>";
-                        echo "<td>" . $row['cuil_cuit'] . "</td>";
-                        echo "<td>" . $row['telefono'] . "</td>";
-                        echo "<td>
-                            <button class='btn btn-info btn-sm'>✏️</button>
-                            <button class='btn btn-danger btn-sm'>🗑️</button>
-                          </td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5'>No hay clientes registrados.</td></tr>";
-                }
+                // if ($result->num_rows > 0) {
+                //     while ($row = $result->fetch_assoc()) {
+                //         echo "<tr>";
+                //         echo "<td>" . $row['nombre'] . "</td>";
+                //         echo "<td>" . $row['apellido'] . "</td>";
+                //         echo "<td>" . $row['cuil_cuit'] . "</td>";
+                //         echo "<td>" . $row['telefono'] . "</td>";
+                //         echo "<td>
+                //             <button class='btn btn-info btn-sm'>✏️</button>
+                //             <button class='btn btn-danger btn-sm'>🗑️</button>
+                //           </td>";
+                //         echo "</tr>";
+                //     }
+                // } else {
+                //     echo "<tr><td colspan='5'>No hay clientes registrados.</td></tr>";
+                // }
                 ?>
             </tbody>
         </table>
@@ -61,5 +61,5 @@ $result = $conn->query($sql);
 </html>
 
 <?php
-$conn->close();
+//$conn->close();
 ?>
