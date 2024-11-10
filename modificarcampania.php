@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DannaFox - Actualizar Campaña</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -45,16 +44,16 @@
                     <label for="cantidad">Cantidad de mensajes a enviar:</label>
                     <select class="form-control" id="cantidad" name="cantidad" required>
                         <option value="">Seleccionar</option>
-                        <option value="">7000</option>
-                        <option value="">14000</option>
-                        <option value="">21000</option>
-                        <option value="">28000</option>
-                        <option value="">35000</option>
-                        <option value="">42000</option>
-                        <option value="">49000</option>
-                        <option value="">56000</option>
-                        <option value="">63000</option>
-                        <option value="">70000</option>
+                        <option value="7000">7000</option>
+                        <option value="14000">14000</option>
+                        <option value="21000">21000</option>
+                        <option value="28000">28000</option>
+                        <option value="35000">35000</option>
+                        <option value="42000">42000</option>
+                        <option value="49000">49000</option>
+                        <option value="56000">56000</option>
+                        <option value="63000">63000</option>
+                        <option value="70000">70000</option>
                     </select>
                 </div>
             </div>
@@ -85,14 +84,14 @@
                 <label for="estado_campaña">Estado de la Campaña:</label>
                 <select class="form-control" id="estado_campaña" name="estado_campaña" required>
                     <option value="">Seleccionar</option>
-                    <option value="">Creada</option>
-                    <option value="">En ejecución</option>
-                    <option value="">Finalizada</option>
+                    <option value="Creada">Creada</option>
+                    <option value="En ejecución">En ejecución</option>
+                    <option value="Finalizada">Finalizada</option>
 
 
                 </select>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Actualizar Campaña Publicitaria</button>
-    </div>
-    </form>
+            </div>
+        </form>
     </div>
