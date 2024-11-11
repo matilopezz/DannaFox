@@ -1,5 +1,6 @@
 <?php
 // campanias.php
+include '..//components/navbar.php'
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +14,6 @@
 </head>
 
 <body>
-    <?php include 'includes/navbar.php'; ?> <!-- IMPORT DE NAVBAR -->
     <div class="container">
         <h2>CAMPAÑAS:</h2>
         <button class="btn btn-primary" onclick="window.location.href='crearcampania.php'">Añadir Campaña</button>

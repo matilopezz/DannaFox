@@ -1,5 +1,6 @@
 <?php
 // modificarcampania.php
+include '..//components/navbar.php'
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,8 +13,6 @@
 </head>
 
 <body>
-    <?php include 'includes/navbar.php'; ?> <!-- IMPORT DE NAVBAR -->
-
     <div class="container mt-5">
         <h1 class="text-center">ACTUALIZAR CAMPAÑA PUBLICITARIA</h1>
         <hr>

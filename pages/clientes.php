@@ -1,7 +1,6 @@
 <?php
 // clientes.php
-// include 'includes/db_connection.php'; // Import conexión a DB
-
+ include '..//components/navbar.php'
 // 
 // $sql = "SELECT nombre, apellido, cuil_cuit, telefono FROM clientes";
 // $result = $conn->query($sql);
@@ -17,7 +16,6 @@
 </head>
 
 <body>
-    <?php include 'includes/navbar.php'; ?> <!-- IMPORT DE NAVBAR -->
     <div class="container">
         <h2>CLIENTES:</h2>
         <button class="btn btn-primary" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>

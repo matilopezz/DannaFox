@@ -1,5 +1,6 @@
 <?php
 // crearcampania.php
+include '..//components/navbar.php'
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,8 +13,6 @@
 </head>
 
 <body>
-    <?php include 'includes/navbar.php'; ?> <!-- IMPORT DE NAVBAR -->
-
     <div class="container text-center mt-5">
         <h2>CREAR CAMPAÑA PUBLICTARIA</h2>
         <div class="d-grid gap-3 col-6 mx-auto mt-5">

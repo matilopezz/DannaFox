@@ -1,4 +1,6 @@
 <?php
+// modificarcliente.php
+include '..//components/navbar.php'
 
 ?>
 <!DOCTYPE html>
@@ -7,19 +9,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DannaFox - Nueva Campaña</title>
+    <title>DannaFox - Modificar Cliente</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-
-    <?php include 'includes/navbar.php'; ?> <!-- IMPORT DE NAVBAR -->
     <div class="container text-center mt-5">
-        <h2>AÑADIR CLIENTE</h2>
+        <h2>ACTUALIZAR CLIENTE</h2>
         <div class="d-grid gap-3 col-6 mx-auto mt-5">
             <h3>Información del Cliente:</h3>
 
-            <form>
+            <form action="procesar_modificacion.php" method="post">
+
                 <!-- Nombre y Apellido -->
                 <div class="row mb-3">
                     <div class="col">
@@ -59,7 +60,7 @@
 
                 <!-- Botón de Enviar -->
                 <div class="mt-4">
-                    <button type="submit" class="btn btn-primary">Añadir Cliente</button>
+                    <button type="submit" class="btn btn-primary">Actualizar Cliente</button>
                 </div>
 
             </form>
