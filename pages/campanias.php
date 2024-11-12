@@ -1,6 +1,11 @@
 <?php
 // campanias.php
-include '..//components/navbar.php'
+include '..//db/conexion.php'; // Incluir la conexión a la base de datos
+include '..//components/navbar.php';
+
+
+$sql = "SELECT campania_id, nombre_campania, estado, fecha_inicio FROM campanias";
+$result = $conn->query($sql)
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,6 +24,7 @@ include '..//components/navbar.php'
         <button class="btn btn-primary" onclick="window.location.href='crearcampania.php'">Añadir Campaña</button>
         <input type="text" placeholder="Buscar Cliente" class="form-control" style="width: 200px; display: inline-block; margin-left: 20px;">
 
+
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
@@ -29,8 +35,36 @@ include '..//components/navbar.php'
                     <th>Acciones</th>
                 </tr>
             </thead>
+            <tbody>
+                <?php
+                // Verificar si hay resultados en la consulta
+                if ($result->num_rows > 0) {
+                    // Recorrer los resultados y mostrarlos en la tabla
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['nombre_campania'] . "</td>";
+                        echo "<td>" . $row['nombre_campania'] . "</td>"; 
+                        echo "<td>" . $row['estado'] . "</td>";
+                        echo "<td>" . $row['fecha_inicio'] . "</td>";
+                        echo "<td>
+                                <button class='btn btn-info btn-sm'>✏️</button>
+                                <button class='btn btn-danger btn-sm'>🗑️</button>
+                              </td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>No hay campañas registradas.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
 </body>
 
 </html>
 
-</html>
+<?php
+// Cerrar la conexión
+$conn->close();
+?>

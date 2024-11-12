@@ -26,10 +26,9 @@ $dbname = $_ENV['DB_NAME'];
 $user = $_ENV['DB_USER'];
 $password = $_ENV['DB_PASSWORD'];
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conexión con BDD correcta.";
-} catch (PDOException $e) {
-    echo "Error de conexión: " . $e->getMessage();
+$conn = new mysqli($host, $user, $password, $dbname);
+
+// Verificar si la conexión fue exitosa
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
 }

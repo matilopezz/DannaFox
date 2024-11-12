@@ -1,9 +1,10 @@
 <?php
-// clientes.php
- include '..//components/navbar.php'
-// 
-// $sql = "SELECT nombre, apellido, cuil_cuit, telefono FROM clientes";
-// $result = $conn->query($sql);
+
+include '..//db/conexion.php'; // Incluir la conexión a la base de datos
+include '..//components/navbar.php';
+
+$sql = "SELECT nombre, apellido, cuil_cuit, telefono FROM clientes";
+$result = $conn->query($sql) // Ejecutar la consulta
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,22 +34,24 @@
             </thead>
             <tbody>
                 <?php
-                // if ($result->num_rows > 0) {
-                //     while ($row = $result->fetch_assoc()) {
-                //         echo "<tr>";
-                //         echo "<td>" . $row['nombre'] . "</td>";
-                //         echo "<td>" . $row['apellido'] . "</td>";
-                //         echo "<td>" . $row['cuil_cuit'] . "</td>";
-                //         echo "<td>" . $row['telefono'] . "</td>";
-                //         echo "<td>
-                //             <button class='btn btn-info btn-sm'>✏️</button>
-                //             <button class='btn btn-danger btn-sm'>🗑️</button>
-                //           </td>";
-                //         echo "</tr>";
-                //     }
-                // } else {
-                //     echo "<tr><td colspan='5'>No hay clientes registrados.</td></tr>";
-                // }
+                // Verificar si hay resultados en la consulta
+                if ($result->num_rows > 0) {
+                    // Recorrer los resultados y mostrarlos en la tabla
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['nombre'] . "</td>";
+                        echo "<td>" . $row['apellido'] . "</td>";
+                        echo "<td>" . $row['cuil_cuit'] . "</td>";
+                        echo "<td>" . $row['telefono'] . "</td>";
+                        echo "<td>
+                            <button class='btn btn-info btn-sm'>✏️</button>
+                            <button class='btn btn-danger btn-sm'>🗑️</button>
+                        </td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>No hay clientes registrados.</td></tr>";
+                }
                 ?>
             </tbody>
         </table>
@@ -59,5 +62,6 @@
 </html>
 
 <?php
-//$conn->close();
+// Cerrar la conexión (no es estrictamente necesario con PDO, ya que se cierra automáticamente)
+$pdo = null;
 ?>
