@@ -1,6 +1,21 @@
 <?php
-// crearcampania.php
-include '..//components/navbar.php'
+include '..//db/conexion.php';
+include '..//components/navbar.php';
+
+if(isset($_POST['agregar'])){
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $razon_social = $_POST['razon_social'];
+    $cuil_cuit = $_POST['cuil_cuit'];
+    $telefono = $_POST['telefono'];
+    $email = $_POST['email'];
+    
+    $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES ('$nombre', '$apellido', '$razon_social', '$cuil_cuit',  '$telefono', '$email')";
+    
+    $conn -> query($insertQuery);
+
+    header(header: 'Location: crearcliente.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,7 +35,7 @@ include '..//components/navbar.php'
 
 
 
-            <form action="procesar_campania.php" method="POST">
+            <form method="POST">
                 <!-- Cliente -->
                 <div class="form-group">
                     <label for="cliente">Cliente:</label>

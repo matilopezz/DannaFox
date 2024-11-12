@@ -1,7 +1,26 @@
 <?php
-include '..//components/navbar.php'
+include '..//components/navbar.php';
+include '..//db/conexion.php';
 
+$sql = "SELECT * FROM clientes";
+$result = $conn->query($sql); 
+
+if(isset($_POST['agregar'])){
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $razon_social = $_POST['razon_social'];
+    $cuil_cuit = $_POST['cuil_cuit'];
+    $telefono = $_POST['telefono'];
+    $email = $_POST['email'];
+    
+    $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES ('$nombre', '$apellido', '$razon_social', '$cuil_cuit',  '$telefono', '$email')";
+    
+    $conn -> query($insertQuery);
+
+    header(header: 'Location: crearcliente.php');
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -18,7 +37,7 @@ include '..//components/navbar.php'
         <div class="d-grid gap-3 col-6 mx-auto mt-5">
             <h3>Información del Cliente:</h3>
 
-            <form>
+            <form method="POST">
                 <!-- Nombre y Apellido -->
                 <div class="row mb-3">
                     <div class="col">
@@ -58,7 +77,7 @@ include '..//components/navbar.php'
 
                 <!-- Botón de Enviar -->
                 <div class="mt-4">
-                    <button type="submit" class="btn btn-primary">Añadir Cliente</button>
+                    <button type="submit" class="btn btn-primary" name="agregar">Añadir Cliente</button>
                 </div>
 
             </form>

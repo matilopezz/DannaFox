@@ -1,6 +1,49 @@
 <?php
 // modificarcliente.php
-include '..//components/navbar.php'
+include '..//components/navbar.php';
+include '..//db/conexion.php';
+
+if (isset($_GET['cuil_cuit'])) {
+    $cuil_cuit = $_GET['cuil_cuit'];
+    
+    // Obtener los datos del cliente con el cuil/cuit
+    $query = "SELECT * FROM clientes WHERE cuil_cuit = ?";
+    $stmt = $conn->prepare($query);        
+    $stmt->bind_param("s", $cuil_cuit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $cliente = $result->fetch_assoc();
+
+    if (!$cliente) {
+        echo "Cliente no encontrado.";
+        exit;
+    }
+} else {
+    echo "ID de cliente no proporcionado.";
+    exit;
+}
+
+
+if (isset($_POST['actualizar'])) {
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $razon_social = $_POST['razon_social'];
+    $cuil_cuit = $_POST['cuil_cuit'];
+    $telefono = $_POST['telefono'];
+    $email = $_POST['email'];
+
+    $updateQuery = "UPDATE clientes SET nombre = ?, apellido = ?, razon_social = ?, telefono = ?, email = ? WHERE cuil_cuit = ?";
+    $stmt = $conn->prepare($updateQuery);
+    $stmt->bind_param("ssssss", $nombre, $apellido, $razon_social, $telefono, $email, $cuil_cuit);
+
+
+    if ($stmt->execute()) {
+        header('Location: clientes.php');
+        exit;
+    } else {
+        echo "Error al actualizar el cliente: " . $conn->error;
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -19,17 +62,17 @@ include '..//components/navbar.php'
         <div class="d-grid gap-3 col-6 mx-auto mt-5">
             <h3>Información del Cliente:</h3>
 
-            <form action="procesar_modificacion.php" method="post">
+            <form method="POST">
 
                 <!-- Nombre y Apellido -->
                 <div class="row mb-3">
                     <div class="col">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre" required>
+                        <input type="text" class="form-control" name="nombre" id="nombre" required value="<?php echo $cliente['nombre']; ?>">
                     </div>
                     <div class="col">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" class="form-control" name="apellido" id="apellido" required>
+                        <input type="text" class="form-control" name="apellido" id="apellido" required value="<?php echo $cliente['apellido']; ?>">
                     </div>
                 </div>
 
@@ -37,11 +80,11 @@ include '..//components/navbar.php'
                 <div class="row mb-3">
                     <div class="col">
                         <label for="cuil_cuit">CUIL / CUIT:</label>
-                        <input type="text" class="form-control" name="cuil_cuit" id="cuil_cuit" required>
+                        <input type="text" class="form-control" name="cuil_cuit" id="cuil_cuit" required value="<?php echo $cliente['cuil_cuit']; ?>">
                     </div>
                     <div class="col">
                         <label for="razon_social">Razón Social:</label>
-                        <input type="text" class="form-control" name="razon_social" id="razon_social" required>
+                        <input type="text" class="form-control" name="razon_social" id="razon_social" required value="<?php echo $cliente['razon_social']; ?>">
 
                     </div>
                 </div>
@@ -50,17 +93,17 @@ include '..//components/navbar.php'
                 <div class="row mb-3">
                     <div class="col">
                         <label for="telefono">Teléfono:</label>
-                        <input type="text" class="form-control" name="telefono" id="telefono" required>
+                        <input type="text" class="form-control" name="telefono" id="telefono" required value="<?php echo $cliente['telefono']; ?>">
                     </div>
                     <div class="col">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email" required>
+                        <input type="email" class="form-control" name="email" id="email" required value="<?php echo $cliente['email']; ?>">
                     </div>
                 </div>
 
                 <!-- Botón de Enviar -->
                 <div class="mt-4">
-                    <button type="submit" class="btn btn-primary">Actualizar Cliente</button>
+                    <button type="submit" class="btn btn-primary" name="actualizar">Actualizar Cliente</button>
                 </div>
 
             </form>

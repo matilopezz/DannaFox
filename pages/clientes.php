@@ -3,8 +3,21 @@
 include '..//db/conexion.php'; // Incluir la conexión a la base de datos
 include '..//components/navbar.php';
 
-$sql = "SELECT nombre, apellido, cuil_cuit, telefono FROM clientes";
-$result = $conn->query($sql) // Ejecutar la consulta
+$sql = "SELECT * FROM clientes";
+$result = $conn->query($sql);
+
+// ELIMINAR CLIENTE
+
+if(isset($_POST['eliminar'])){
+    $cuil_cuit = $_POST['cuil_cuit'];
+    
+    $insertQuery = "DELETE FROM clientes WHERE cuil_cuit = '$cuil_cuit'";
+    
+    $conn -> query($insertQuery);
+
+    header(header: 'Location: clientes.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,42 +30,45 @@ $result = $conn->query($sql) // Ejecutar la consulta
 </head>
 
 <body>
-    <div class="container">
-        <h2>CLIENTES:</h2>
-        <button class="btn btn-primary" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
-        <input type="text" placeholder="Buscar Cliente" class="form-control" style="width: 200px; display: inline-block; margin-left: 20px;">
+    <div class="container d-flex flex-column align-items-center">
+        <h2 class="mt-5">LISTA DE CLIENTES:</h2>
+        <button class="btn btn-primary mt-4" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
+        <input type="text" placeholder="Buscar Cliente" class="form-control mt-4" style="width: 500px; display: inline-block; margin-left: 20px;">
 
-        <table class="table table-bordered mt-4">
+        <table class="table table-bordered pt-3 mt-5">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>CUIL/CUIT</th>
-                    <th>Teléfono</th>
-                    <th>Acciones</th>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Apellido</th>
+                    <th class="text-center">CUIL/CUIT</th>
+                    <th class="text-center">Razón social</th>
+                    <th class="text-center">Teléfono</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
-                // Verificar si hay resultados en la consulta
-                if ($result->num_rows > 0) {
-                    // Recorrer los resultados y mostrarlos en la tabla
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<tr>";
-                        echo "<td>" . $row['nombre'] . "</td>";
-                        echo "<td>" . $row['apellido'] . "</td>";
-                        echo "<td>" . $row['cuil_cuit'] . "</td>";
-                        echo "<td>" . $row['telefono'] . "</td>";
-                        echo "<td>
-                            <button class='btn btn-info btn-sm'>✏️</button>
-                            <button class='btn btn-danger btn-sm'>🗑️</button>
-                        </td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5'>No hay clientes registrados.</td></tr>";
-                }
-                ?>
+                <?php while($row = $result->fetch_assoc()): ?>
+                    <tr>
+                    <td class="text-center"><?php echo isset($row['cliente_id']) ? $row['cliente_id'] : 'No ID'; ?></td>
+                        <td class="text-center"><?php echo $row['nombre']; ?></td>
+                        <td class="text-center"><?php echo $row['apellido']; ?></td>
+                        <td class="text-center"><?php echo $row['cuil_cuit']; ?></td>
+                        <td class="text-center"><?php echo $row['razon_social']; ?></td>    
+                        <td class="text-center"><?php echo $row['telefono']; ?></td>
+                        <td class="text-center"><?php echo $row['email']; ?></td>
+                        <td class="d-flex justify-content-center">
+                            <!-- Botón para eliminar cliente -->
+                            <form method="POST">
+                                <input type="hidden" name="cuil_cuit" value="<?php echo $row['cuil_cuit']; ?>">
+                                <button type="submit" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                            <a href="modificarcliente.php?cuil_cuit=<?php echo $row['cuil_cuit']; ?>" class="ms-3">                            <button class="btn btn-primary btn-sm">Modificar</button></a>
+
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>

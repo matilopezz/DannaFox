@@ -1,6 +1,6 @@
 <?php
 // index.php
-include '..//components/navbar.php'
+include 'components/navbar.php'
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,8 +19,8 @@ include '..//components/navbar.php'
         <hr class="my-4" style="width: 50%; margin: auto;">
 
         <div class="d-grid gap-3 col-6 mx-auto mt-5">
-            <a href="clientes.php" class="btn btn-primary btn-lg">GESTIONAR CLIENTES</a>
-            <a href="campanias.php" class="btn btn-primary btn-lg">GESTIONAR CAMPAÑAS PUBLICITARIAS</a>
+            <a href="pages/clientes.php" class="btn btn-primary btn-lg">GESTIONAR CLIENTES</a>
+            <a href="pages/campanias.php" class="btn btn-primary btn-lg">GESTIONAR CAMPAÑAS PUBLICITARIAS</a>
         </div>
     </div>
 </body>
