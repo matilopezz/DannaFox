@@ -17,7 +17,7 @@
                 style="
             background-color: #4F847C;
             color: white;
-            font-size: 12px;
+            font-size: 17px;
             font-weight: 500;
             border-radius: 4px;
             transition: all 0.2s ease;
