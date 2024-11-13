@@ -8,11 +8,11 @@ $result = $conn->query($sql);
 
 // ELIMINAR CLIENTE
 
-if(isset($_POST['eliminar'])){
+if (isset($_POST['eliminar'])) {
     $cuil_cuit = $_POST['cuil_cuit'];
-    
+
     $deleteQuery = "DELETE FROM clientes WHERE cuil_cuit = '$cuil_cuit'";
-    
+
     if ($conn->query($deleteQuery)) {
         header('Location: clientes.php?success=true&operation=delete');
     } else {
@@ -36,9 +36,9 @@ if(isset($_POST['eliminar'])){
     <div class="container d-flex flex-column align-items-center">
         <h2 class="mt-5">LISTA DE CLIENTES:</h2>
         <button class="btn-steel-blue btn mt-4" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
-        
-            <input type="text" placeholder="Buscar Cliente" id="buscador" class="form-control mt-4" >
-   
+
+        <input type="text" placeholder="Buscar Cliente" id="buscador" class="form-control mt-4">
+
 
         <table class="table table-bordered pt-3 mt-4">
             <thead>
@@ -54,13 +54,13 @@ if(isset($_POST['eliminar'])){
                 </tr>
             </thead>
             <tbody id="tablaClientes">
-                <?php while($row = $result->fetch_assoc()): ?>
+                <?php while ($row = $result->fetch_assoc()): ?>
                     <tr>
-                    <td class="text-center"><?php echo isset($row['cliente_id']) ? $row['cliente_id'] : 'No ID'; ?></td>
+                        <td class="text-center"><?php echo isset($row['cliente_id']) ? $row['cliente_id'] : 'No ID'; ?></td>
                         <td class="text-center"><?php echo $row['nombre']; ?></td>
                         <td class="text-center"><?php echo $row['apellido']; ?></td>
                         <td class="text-center"><?php echo $row['cuil_cuit']; ?></td>
-                        <td class="text-center"><?php echo $row['razon_social']; ?></td>    
+                        <td class="text-center"><?php echo $row['razon_social']; ?></td>
                         <td class="text-center"><?php echo $row['telefono']; ?></td>
                         <td class="text-center"><?php echo $row['email']; ?></td>
                         <td class="d-flex justify-content-center">
@@ -69,7 +69,8 @@ if(isset($_POST['eliminar'])){
                                 <input type="hidden" name="cuil_cuit" value="<?php echo $row['cuil_cuit']; ?>">
                                 <button type="submit" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
-                            <a href="modificarcliente.php?cuil_cuit=<?php echo $row['cuil_cuit']; ?>" class="ms-3">                            <button class="btn btn-primary btn-sm">Modificar</button></a>
+                            <a href="modificarcliente.php?cuil_cuit=<?php echo $row['cuil_cuit']; ?>" class="ms-3">
+                                <button class="btn btn-primary btn-sm">Modificar</button></a>
 
                         </td>
                     </tr>
@@ -82,6 +83,7 @@ if(isset($_POST['eliminar'])){
     <script src="../js/buscador.js"></script>
 
 </body>
+
 </html>
 
 <?php

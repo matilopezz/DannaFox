@@ -22,7 +22,7 @@ $result = $conn->query($sql)
     <div class="container d-flex flex-column align-items-center">
         <h2 class="mt-5">CAMPAÑAS:</h2>
         <button class="btn-steel-blue btn  mt-4" onclick="window.location.href='crearcampania.php'">Añadir Campaña</button>
-        <input type="text" placeholder="Buscar Cliente" class="form-control mt-4" style="width: 200px; display: inline-block; margin-left: 20px;">
+        <input type="text" placeholder="Buscar campaña" class="form-control mt-4" style="width: 200px; display: inline-block; margin-left: 20px;">
 
 
         <table class="table table-bordered mt-4">
