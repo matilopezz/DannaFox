@@ -37,7 +37,7 @@ if(isset($_POST['eliminar'])){
         <button class="btn btn-primary mt-4" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
         <input type="text" placeholder="Buscar Cliente" id="buscador" class="form-control mt-4" style="width: 500px; display: inline-block; margin-left: 20px;">
 
-        <table class="table table-bordered pt-3 mt-5">
+        <table class="table table-bordered pt-3 mt-4">
             <thead>
                 <tr>
                     <th class="text-center">ID</th>

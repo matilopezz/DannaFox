@@ -19,10 +19,10 @@ $result = $conn->query($sql)
 </head>
 
 <body>
-    <div class="container">
-        <h2>CAMPAÑAS:</h2>
-        <button class="btn btn-primary" onclick="window.location.href='crearcampania.php'">Añadir Campaña</button>
-        <input type="text" placeholder="Buscar Cliente" class="form-control" style="width: 200px; display: inline-block; margin-left: 20px;">
+    <div class="container d-flex flex-column align-items-center">
+        <h2 class="mt-5">CAMPAÑAS:</h2>
+        <button class="btn btn-primary mt-4" onclick="window.location.href='crearcampania.php'">Añadir Campaña</button>
+        <input type="text" placeholder="Buscar Cliente" class="form-control mt-4" style="width: 200px; display: inline-block; margin-left: 20px;">
 
 
         <table class="table table-bordered mt-4">
