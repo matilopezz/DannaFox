@@ -11,11 +11,13 @@ $result = $conn->query($sql);
 if(isset($_POST['eliminar'])){
     $cuil_cuit = $_POST['cuil_cuit'];
     
-    $insertQuery = "DELETE FROM clientes WHERE cuil_cuit = '$cuil_cuit'";
+    $deleteQuery = "DELETE FROM clientes WHERE cuil_cuit = '$cuil_cuit'";
     
-    $conn -> query($insertQuery);
-
-    header(header: 'Location: clientes.php');
+    if ($conn->query($deleteQuery)) {
+        header('Location: clientes.php?success=true');
+    } else {
+        echo "Error al eliminar el cliente: " . $conn->error;
+    }
 }
 
 ?>
@@ -33,7 +35,7 @@ if(isset($_POST['eliminar'])){
     <div class="container d-flex flex-column align-items-center">
         <h2 class="mt-5">LISTA DE CLIENTES:</h2>
         <button class="btn btn-primary mt-4" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
-        <input type="text" placeholder="Buscar Cliente" class="form-control mt-4" style="width: 500px; display: inline-block; margin-left: 20px;">
+        <input type="text" placeholder="Buscar Cliente" id="buscador" class="form-control mt-4" style="width: 500px; display: inline-block; margin-left: 20px;">
 
         <table class="table table-bordered pt-3 mt-5">
             <thead>
@@ -48,7 +50,7 @@ if(isset($_POST['eliminar'])){
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tablaClientes">
                 <?php while($row = $result->fetch_assoc()): ?>
                     <tr>
                     <td class="text-center"><?php echo isset($row['cliente_id']) ? $row['cliente_id'] : 'No ID'; ?></td>
@@ -73,8 +75,8 @@ if(isset($_POST['eliminar'])){
         </table>
     </div>
 
+    <script src="../js/eliminarClienteAlerta.js"></script>
 </body>
-
 </html>
 
 <?php

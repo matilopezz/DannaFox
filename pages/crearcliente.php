@@ -15,9 +15,25 @@ if(isset($_POST['agregar'])){
     
     $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES ('$nombre', '$apellido', '$razon_social', '$cuil_cuit',  '$telefono', '$email')";
     
-    $conn -> query($insertQuery);
+if(isset($_POST['agregar'])){
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $razon_social = $_POST['razon_social'];
+    $cuil_cuit = $_POST['cuil_cuit'];
+    $telefono = $_POST['telefono'];
+    $email = $_POST['email'];
+    
+    $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES ('$nombre', '$apellido', '$razon_social', '$cuil_cuit',  '$telefono', '$email')";
+    
+    if ($conn->query($insertQuery) === TRUE) {
+        header('Location: crearcliente.php?success=true'); 
+        exit;
+    } else {
+        echo "Error: " . $conn->error;
+    }
+    
+}
 
-    header(header: 'Location: crearcliente.php');
 }
 ?>
 
@@ -42,11 +58,11 @@ if(isset($_POST['agregar'])){
                 <div class="row mb-3">
                     <div class="col">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre" required>
+                        <input type="text" class="form-control" name="nombre" id="nombre" required maxlength="50">
                     </div>
                     <div class="col">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" class="form-control" name="apellido" id="apellido" required>
+                        <input type="text" class="form-control" name="apellido" id="apellido" required maxlength="50">
                     </div>
                 </div>
 
@@ -54,11 +70,11 @@ if(isset($_POST['agregar'])){
                 <div class="row mb-3">
                     <div class="col">
                         <label for="cuil_cuit">CUIL / CUIT:</label>
-                        <input type="text" class="form-control" name="cuil_cuit" id="cuil_cuit" required>
+                        <input type="text" class="form-control" name="cuil_cuit" id="cuil_cuit" required maxlength="20" pattern="\d+" title="Por favor, ingrese solo números.">
                     </div>
                     <div class="col">
                         <label for="razon_social">Razón Social:</label>
-                        <input type="text" class="form-control" name="razon_social" id="razon_social" required>
+                        <input type="text" class="form-control" name="razon_social" id="razon_social" required maxlength="100">
 
                     </div>
                 </div>
@@ -67,11 +83,11 @@ if(isset($_POST['agregar'])){
                 <div class="row mb-3">
                     <div class="col">
                         <label for="telefono">Teléfono:</label>
-                        <input type="text" class="form-control" name="telefono" id="telefono" required>
+                        <input type="text" class="form-control" name="telefono" id="telefono" required maxlength="20" pattern="\d+" title="Por favor, ingrese solo números.">
                     </div>
                     <div class="col">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email" required>
+                        <input type="email" class="form-control" name="email" id="email" required maxlength="100">
                     </div>
                 </div>
 
@@ -84,6 +100,7 @@ if(isset($_POST['agregar'])){
         </div>
     </div>
 
+    <script src="../js/alertaAddCliente.js"></script>
 </body>
 
 </html>

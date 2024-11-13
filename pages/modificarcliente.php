@@ -19,10 +19,11 @@ if (isset($_GET['cuil_cuit'])) {
         exit;
     }
 } else {
-    echo "ID de cliente no proporcionado.";
+    echo "CUIL/CUIT de cliente no proporcionado.";
     exit;
 }
 
+$actualizacionExitosa = false;
 
 if (isset($_POST['actualizar'])) {
     $nombre = $_POST['nombre'];
@@ -38,8 +39,8 @@ if (isset($_POST['actualizar'])) {
 
 
     if ($stmt->execute()) {
-        header('Location: clientes.php');
-        exit;
+        header('Location: modificarcliente.php?cuil_cuit=' . $cuil_cuit .'&success=true');
+
     } else {
         echo "Error al actualizar el cliente: " . $conn->error;
     }
@@ -63,16 +64,17 @@ if (isset($_POST['actualizar'])) {
             <h3>Información del Cliente:</h3>
 
             <form method="POST">
+                <input type="hidden" name="cuil_cuit" value="<?php echo $cliente['cuil_cuit']; ?>">
 
                 <!-- Nombre y Apellido -->
                 <div class="row mb-3">
                     <div class="col">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre" required value="<?php echo $cliente['nombre']; ?>">
+                        <input type="text" class="form-control" name="nombre" id="nombre" required maxlength="50" required value="<?php echo $cliente['nombre']; ?>">
                     </div>
                     <div class="col">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" class="form-control" name="apellido" id="apellido" required value="<?php echo $cliente['apellido']; ?>">
+                        <input type="text" class="form-control" name="apellido" id="apellido" required maxlength="50" required value="<?php echo $cliente['apellido']; ?>">
                     </div>
                 </div>
 
@@ -80,11 +82,12 @@ if (isset($_POST['actualizar'])) {
                 <div class="row mb-3">
                     <div class="col">
                         <label for="cuil_cuit">CUIL / CUIT:</label>
-                        <input type="text" class="form-control" name="cuil_cuit" id="cuil_cuit" required value="<?php echo $cliente['cuil_cuit']; ?>">
+                        <input type="text" class="form-control" name="cuil_cuit" id="cuil_cuit" required maxlength="20" pattern="\d+" title="Por favor, ingrese solo números." value="<?php echo $cliente['cuil_cuit']; ?>">
+
                     </div>
                     <div class="col">
                         <label for="razon_social">Razón Social:</label>
-                        <input type="text" class="form-control" name="razon_social" id="razon_social" required value="<?php echo $cliente['razon_social']; ?>">
+                        <input type="text" class="form-control" name="razon_social" id="razon_social" required maxlength="100" required value="<?php echo $cliente['razon_social']; ?>">
 
                     </div>
                 </div>
@@ -93,11 +96,11 @@ if (isset($_POST['actualizar'])) {
                 <div class="row mb-3">
                     <div class="col">
                         <label for="telefono">Teléfono:</label>
-                        <input type="text" class="form-control" name="telefono" id="telefono" required value="<?php echo $cliente['telefono']; ?>">
+                        <input type="text" class="form-control" name="telefono" id="telefono" required maxlength="20" pattern="\d+" title="Por favor, ingrese solo números." value="<?php echo $cliente['telefono']; ?>">
                     </div>
                     <div class="col">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email" required value="<?php echo $cliente['email']; ?>">
+                        <input type="email" class="form-control" name="email" id="email" required maxlength="100" required value="<?php echo $cliente['email']; ?>">
                     </div>
                 </div>
 
@@ -109,6 +112,8 @@ if (isset($_POST['actualizar'])) {
             </form>
         </div>
     </div>
+
+    <script src="../js/alertaModifyCliente.js"></script>
 
 </body>
 
