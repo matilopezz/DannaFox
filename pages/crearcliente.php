@@ -26,7 +26,7 @@ if(isset($_POST['agregar'])){
     $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES ('$nombre', '$apellido', '$razon_social', '$cuil_cuit',  '$telefono', '$email')";
     
     if ($conn->query($insertQuery) === TRUE) {
-        header('Location: crearcliente.php?success=true'); 
+        header('Location: crearcliente.php?success=true&operation=create'); 
         exit;
     } else {
         echo "Error: " . $conn->error;
@@ -49,6 +49,7 @@ if(isset($_POST['agregar'])){
 </head>
 
 <body>
+
     <div class="container text-center mt-5">
         <h2>AÑADIR CLIENTE</h2>
         <div class="d-grid gap-3 col-6 mx-auto mt-5">
@@ -101,7 +102,7 @@ if(isset($_POST['agregar'])){
         </div>
     </div>
 
-    <script src="../js/alertaAddCliente.js"></script>
+    <script src="../js/alertas.js"></script>
 </body>
 
 </html>

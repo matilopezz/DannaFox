@@ -39,7 +39,7 @@ if (isset($_POST['actualizar'])) {
 
 
     if ($stmt->execute()) {
-        header('Location: modificarcliente.php?cuil_cuit=' . $cuil_cuit .'&success=true');
+        header('Location: clientes.php?cuil_cuit=' . $cuil_cuit .'&success=true&operation=update');
 
     } else {
         echo "Error al actualizar el cliente: " . $conn->error;
@@ -114,7 +114,7 @@ if (isset($_POST['actualizar'])) {
         </div>
     </div>
 
-    <script src="../js/alertaModifyCliente.js"></script>
+    <script src="../js/alertas.js"></script>
 
 </body>
 

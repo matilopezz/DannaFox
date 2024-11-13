@@ -14,7 +14,7 @@ if(isset($_POST['eliminar'])){
     $deleteQuery = "DELETE FROM clientes WHERE cuil_cuit = '$cuil_cuit'";
     
     if ($conn->query($deleteQuery)) {
-        header('Location: clientes.php?success=true');
+        header('Location: clientes.php?success=true&operation=delete');
     } else {
         echo "Error al eliminar el cliente: " . $conn->error;
     }
@@ -36,7 +36,9 @@ if(isset($_POST['eliminar'])){
     <div class="container d-flex flex-column align-items-center">
         <h2 class="mt-5">LISTA DE CLIENTES:</h2>
         <button class="btn-steel-blue btn mt-4" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
-        <input type="text" placeholder="Buscar Cliente" id="buscador" class="form-control mt-4" style="width: 500px; display: inline-block; margin-left: 20px;">
+        
+            <input type="text" placeholder="Buscar Cliente" id="buscador" class="form-control mt-4" >
+   
 
         <table class="table table-bordered pt-3 mt-4">
             <thead>
@@ -76,7 +78,9 @@ if(isset($_POST['eliminar'])){
         </table>
     </div>
 
-    <script src="../js/eliminarClienteAlerta.js"></script>
+    <script src="../js/alertas.js"></script>
+    <script src="../js/buscador.js"></script>
+
 </body>
 </html>
 

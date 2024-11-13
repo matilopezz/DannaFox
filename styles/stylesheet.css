@@ -1,5 +1,27 @@
-.navbar{
+.header{
     background-color: #217AA0;
+}
+
+.navbar ul li{
+    list-style: none;
+
+}
+
+.navbar a{
+    text-decoration: none;
+    color: white;
+}
+
+.navbar a:hover{
+    text-decoration: underline;
+}
+
+.logo a{
+
+    color: white;
+    margin-left: 30px;
+    font-size: 30px;
+    font-weight: 500;
 }
 
 .btn-steel-blue{
@@ -11,4 +33,12 @@
 .btn-steel-blue:hover{
     background-color: #186383;
     color:white
+}
+
+#buscador {
+    width: 500px;
+}
+
+#buscar{
+    margin-left: 20px;
 }
