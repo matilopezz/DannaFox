@@ -29,12 +29,13 @@ if(isset($_POST['eliminar'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DannaFox - Clientes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/stylesheet.css">
 </head>
 
 <body>
     <div class="container d-flex flex-column align-items-center">
         <h2 class="mt-5">LISTA DE CLIENTES:</h2>
-        <button class="btn btn-primary mt-4" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
+        <button class="btn-steel-blue btn mt-4" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
         <input type="text" placeholder="Buscar Cliente" id="buscador" class="form-control mt-4" style="width: 500px; display: inline-block; margin-left: 20px;">
 
         <table class="table table-bordered pt-3 mt-4">

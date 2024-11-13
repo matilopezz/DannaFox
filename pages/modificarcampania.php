@@ -11,6 +11,7 @@ include '..//components/navbar.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DannaFox - Actualizar Campaña</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/stylesheet.css">
 </head>
 
 <body>
@@ -183,7 +184,7 @@ include '..//components/navbar.php';
 
                 <!-- Botón de Enviar -->
                 <div class="mt-4">
-                    <button type="submit" class="btn btn-primary" name="actualizar">Actualizar Campaña</button>
+                    <button type="submit" class="btn-steel-blue btn" name="actualizar">Actualizar Campaña</button>
                 </div>
             </form>
         </div>

@@ -25,6 +25,7 @@ if(isset($_POST['agregar'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DannaFox - Nueva Campaña</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/stylesheet.css">
 </head>
 
 <body>
@@ -107,7 +108,7 @@ if(isset($_POST['agregar'])){
 
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Añadir Campaña Publicitaria</button>
+                <button type="submit" class="btn-steel-blue btn btn-block mt-3">Añadir Campaña Publicitaria</button>
         </div>
         </form>
     </div>

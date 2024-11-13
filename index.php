@@ -9,6 +9,7 @@ include 'components/navbar.php'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DannaFox - Home</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/stylesheet.css">
 </head>
 
 <body>
@@ -19,8 +20,8 @@ include 'components/navbar.php'
         <hr class="my-4" style="width: 50%; margin: auto;">
 
         <div class="d-grid gap-3 col-6 mx-auto mt-5">
-            <a href="pages/clientes.php" class="btn btn-primary btn-lg">GESTIONAR CLIENTES</a>
-            <a href="pages/campanias.php" class="btn btn-primary btn-lg">GESTIONAR CAMPAÑAS PUBLICITARIAS</a>
+            <a href="pages/clientes.php" class="btn-steel-blue btn btn-lg">GESTIONAR CLIENTES</a>
+            <a href="pages/campanias.php" class=" btn-steel-blue btn btn-lg">GESTIONAR CAMPAÑAS PUBLICITARIAS</a>
         </div>
     </div>
 </body>

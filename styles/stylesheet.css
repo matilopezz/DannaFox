@@ -1,0 +1,14 @@
+.navbar{
+    background-color: #217AA0;
+}
+
+.btn-steel-blue{
+    background-color: #217AA0;
+    color: white;
+
+}
+
+.btn-steel-blue:hover{
+    background-color: #186383;
+    color:white
+}

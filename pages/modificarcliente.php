@@ -55,6 +55,7 @@ if (isset($_POST['actualizar'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DannaFox - Modificar Cliente</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/stylesheet.css">
 </head>
 
 <body>
@@ -106,7 +107,7 @@ if (isset($_POST['actualizar'])) {
 
                 <!-- Botón de Enviar -->
                 <div class="mt-4">
-                    <button type="submit" class="btn btn-primary" name="actualizar">Actualizar Cliente</button>
+                    <button type="submit" class="btn-steel-blue btn" name="actualizar">Actualizar Cliente</button>
                 </div>
 
             </form>
