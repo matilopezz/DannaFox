@@ -1,4 +1,5 @@
-document.getElementById("buscador").addEventListener("input", function() {
+
+document.getElementById("buscador").addEventListener("input", function(){
     const valorDeTabla = this.value.toLowerCase();
     const tabla = document.querySelectorAll("#tablaClientes tr");
 
@@ -9,10 +10,12 @@ document.getElementById("buscador").addEventListener("input", function() {
         const cuil_cuit = columna[3].innerText.toLowerCase();
         const razonSocial = columna[4].innerText.toLowerCase();
 
+        // Filtra si coincide con cualquier de las columnas (nombre, apellido, cuil_cuit o razón social)
         if (nombre.includes(valorDeTabla) || apellido.includes(valorDeTabla) || cuil_cuit.includes(valorDeTabla) || razonSocial.includes(valorDeTabla)) {
             columnas.style.display = "";
         } else {
             columnas.style.display = "none";
         }
-    });
+})
 });
+

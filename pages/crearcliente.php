@@ -1,19 +1,6 @@
 <?php
 include '..//components/navbar.php';
 include '..//db/conexion.php';
-
-$sql = "SELECT * FROM clientes";
-$result = $conn->query($sql); 
-
-if(isset($_POST['agregar'])){
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $razon_social = $_POST['razon_social'];
-    $cuil_cuit = $_POST['cuil_cuit'];
-    $telefono = $_POST['telefono'];
-    $email = $_POST['email'];
-    
-    $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES ('$nombre', '$apellido', '$razon_social', '$cuil_cuit',  '$telefono', '$email')";
     
 if(isset($_POST['agregar'])){
     $nombre = $_POST['nombre'];
@@ -23,19 +10,19 @@ if(isset($_POST['agregar'])){
     $telefono = $_POST['telefono'];
     $email = $_POST['email'];
     
-    $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES ('$nombre', '$apellido', '$razon_social', '$cuil_cuit',  '$telefono', '$email')";
+    $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES (?, ?, ?, ?, ?, ?)";
     
-    if ($conn->query($insertQuery) === TRUE) {
+    $stmt = $conn -> prepare($insertQuery);
+    $stmt -> bind_param('ssssss', $nombre, $apellido, $razon_social, $cuil_cuit, $telefono, $email);
+
+    if ($stmt-> execute()){
         header('Location: crearcliente.php?success=true&operation=create'); 
         exit;
     } else {
         echo "Error: " . $conn->error;
     }
     
-}
-
-}
-?>
+}?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -43,7 +30,7 @@ if(isset($_POST['agregar'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DannaFox - Nueva Campaña</title>
+    <title>DannaFox - Nuevo Cliente</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../styles/stylesheet.css">
 </head>

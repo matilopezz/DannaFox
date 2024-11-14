@@ -23,8 +23,6 @@ if (isset($_GET['cuil_cuit'])) {
     exit;
 }
 
-$actualizacionExitosa = false;
-
 if (isset($_POST['actualizar'])) {
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];

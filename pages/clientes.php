@@ -3,18 +3,21 @@
 include '..//db/conexion.php'; // Incluir la conexión a la base de datos
 include '..//components/navbar.php';
 
-$sql = "SELECT * FROM clientes";
-$result = $conn->query($sql);
+    $getQuery = "SELECT * FROM clientes";
+    $result = $conn->query($getQuery);
 
 // ELIMINAR CLIENTE
 
-if (isset($_POST['eliminar'])) {
+if (isset($_POST['eliminar'])){
     $cuil_cuit = $_POST['cuil_cuit'];
 
-    $deleteQuery = "DELETE FROM clientes WHERE cuil_cuit = '$cuil_cuit'";
+    $deleteQuery = "DELETE FROM clientes WHERE cuil_cuit = ? ";
+    $stmt = $conn -> prepare(query:$deleteQuery);
+    $stmt -> bind_param('s', $cuil_cuit);
 
-    if ($conn->query($deleteQuery)) {
+    if ($stmt -> execute()) {
         header('Location: clientes.php?success=true&operation=delete');
+        exit;
     } else {
         echo "Error al eliminar el cliente: " . $conn->error;
     }
@@ -69,6 +72,7 @@ if (isset($_POST['eliminar'])) {
                                 <input type="hidden" name="cuil_cuit" value="<?php echo $row['cuil_cuit']; ?>">
                                 <button type="submit" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
+                            
                             <a href="modificarcliente.php?cuil_cuit=<?php echo $row['cuil_cuit']; ?>" class="ms-3">
                                 <button class="btn btn-primary btn-sm">Modificar</button></a>
 
