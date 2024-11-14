@@ -6,8 +6,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark mx-3">
 
         <ul class="d-flex mx-5">
-        <li class="mx-3"><a href="../pages/clientes.php">CLIENTES</a></li>
-        <li><a href="../pages/campanias.php">CAMPAÑAS</a></li>
+        <li class="mx-3"><a href="/DannaFox/pages/clientes.php">CLIENTES</a></li>
+        <li><a href="/DannaFox/pages/campanias.php">CAMPAÑAS</a></li>
         </ul>
 
 
