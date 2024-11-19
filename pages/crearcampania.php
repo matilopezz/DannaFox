@@ -3,20 +3,45 @@ include '..//db/conexion.php';
 include '..//components/navbar.php';
 include '../auth.php';
 
-if(isset($_POST['agregar'])){
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $razon_social = $_POST['razon_social'];
-    $cuil_cuit = $_POST['cuil_cuit'];
-    $telefono = $_POST['telefono'];
-    $email = $_POST['email'];
-    
-    $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES ('$nombre', '$apellido', '$razon_social', '$cuil_cuit',  '$telefono', '$email')";
-    
-    $conn -> query($insertQuery);
+//Consulta para obtener el cliente en el OPTION
+$getClientes = "SELECT cliente_id, CONCAT(nombre, ' ', apellido) AS cliente_nombre, cuil_cuit FROM clientes";
+$result = $conn->query($getClientes);
 
-    header(header: 'Location: crearcliente.php');
-}
+// if (isset($_POST['crear_campania'])) {
+
+//     $cliente_id = $_POST['cliente']; 
+//     $nombre_campania = $_POST['nombre_campania'];
+//     $fecha_inicio = $_POST['fecha_inicio']; 
+//     $cantidad_mensajes = $_POST['cantidad'];
+//     $texto_SMS = $_POST['sms_text'];
+
+//     $estado = $_POST['estado_campania']; 
+
+//     // Validar que no haya campos vacíos
+//     if (!empty($cliente_id) && !empty($nombre_campana) && !empty($texto_sms)) {
+//         // Preparar la consulta SQL para insertar la campaña
+//         $insertQuery = "INSERT INTO campanias (cliente_id, texto_SMS, nombre_campana, fecha_inicio, estado) 
+//                         VALUES (?, ?, ?, ?, ?)";
+//         $stmt = $conn->prepare($insertQuery);
+
+//         if ($stmt) {
+//             $stmt->bind_param('issss', $cliente_id, $texto_sms, $nombre_campana, $fecha_inicio, $estado);
+
+//             if ($stmt->execute()) {
+//                 // Redirigir a una página de éxito
+//                 header('Location: campanias.php?success=true');
+//                 exit;
+//             } else {
+//                 echo "Error al crear la campaña: " . $stmt->error;
+//             }
+//         } else {
+//             echo "Error al preparar la consulta: " . $conn->error;
+//         }
+//     } else {
+//         echo "Por favor, completa todos los campos.";
+//     }
+// }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,14 +61,22 @@ if(isset($_POST['agregar'])){
             <h4>Información de la campaña publicitaria:</h4>
 
             <!-- Formulario -->
-            <form action="procesar_campania.php" method="POST">
+            <form method="POST">
                 <!-- Cliente -->
                 <div class="row mb-3">
                     <div class="col text-start">
                         <label for="cliente">Cliente:</label>
                         <select class="form-control" id="cliente" name="cliente" required>
                             <option value="">Seleccionar cliente</option>
-                            <!-- Opciones de clientes -->
+                            <?php
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<option value="' . $row['cliente_id'] . '">' . $row['cliente_nombre'] . ' - '. $row['cuil_cuit'] . '</option>';
+                                    }
+                                } else {
+                                    echo '<option value="">No hay clientes disponibles</option>';
+                                }
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -52,7 +85,7 @@ if(isset($_POST['agregar'])){
                 <div class="row mb-3">
                     <div class="col text-start">
                         <label for="nombre_campaña">Nombre de la campaña:</label>
-                        <input type="text" class="form-control" id="nombre_campaña" name="nombre_campaña" required>
+                        <input type="text" class="form-control" id="nombre_campania" name="nombre_campania" required>
                     </div>
                 </div>
 
@@ -188,7 +221,7 @@ if(isset($_POST['agregar'])){
                 <div class="row mb-3">
                     <div class="col text-start">
                         <label for="estado_campaña">Estado de la Campaña:</label>
-                        <select class="form-control" id="estado_campaña" name="estado_campaña" required>
+                        <select class="form-control" id="estado_campania" name="estado_campania" required>
                             <option value="">Seleccionar</option>
                             <option value="Creada">Creada</option>
                             <option value="En ejecución">En ejecución</option>
@@ -199,8 +232,7 @@ if(isset($_POST['agregar'])){
 
                 <!-- Botones de Enviar y Cancelar -->
                 <div class="mt-4 mb-5 d-flex justify-content-between">
-                    <button type="submit" class="btn-steel-blue btn" name="crear" style="width: 200px;">Crear Campaña</button>
-                    <button href="tu-pagina-destino.php" class="btn btn-secondary" style="width: 200px; text-align: center;">Cancelar</button>
+                    <button type="submit" class="btn-steel-blue btn" name="crear_campania" style="width: 200px;">Crear Campaña</button>
                 </div>
 
             </form>

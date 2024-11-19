@@ -4,12 +4,39 @@ if (urlParams.has('success') && urlParams.get('success') === 'true') {
     const operacion = urlParams.get('operation')
 
     if(operacion === 'update'){
-        alert('Cliente actualizado exitosamente');
+        Swal.fire({
+            title: 'Cliente Actualizado',
+            text: 'El cliente ha sido actualizado exitosamente.',
+            icon: 'success',
+            confirmButtonText: 'Entendido'
+        }).then(() => {
+            // Limpia los parámetros de la URL
+            window.history.replaceState(null, '', window.location.pathname);
+        });
     }else if(operacion === 'delete'){
-        alert('Cliente eliminado exitosamente');
+        Swal.fire({
+            title: 'Cliente Eliminado',
+            text: 'El cliente ha sido eliminado exitosamente.',
+            icon: 'success',
+            confirmButtonText: 'Entendido'
+        }).then(() => {
+            // Limpia los parámetros de la URL
+            window.history.replaceState(null, '', window.location.pathname);
+        });
     }else if(operacion === 'create'){
-        alert('Cliente creado exitosamente');
+        Swal.fire({
+            title: 'Cliente Añadido',
+            text: 'El cliente ha sido añadido exitosamente.',
+            icon: 'success',
+            confirmButtonText: 'Entendido'
+        }).then(() => {
+            // Limpia los parámetros de la URL
+            window.history.replaceState(null, '', window.location.pathname);
+        });
     }
 
-    window.history.replaceState({}, '', window.location.pathname);
+
 }
+
+
+

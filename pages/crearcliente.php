@@ -19,7 +19,7 @@ if(isset($_POST['agregar'])){
     $stmt -> bind_param('ssssss', $nombre, $apellido, $razon_social, $cuil_cuit, $telefono, $email);
 
     if ($stmt-> execute()){
-        header('Location: crearcliente.php?success=true&operation=create'); 
+        header('Location: crearcliente.php?success=true&operation=create');
         exit;
     } else {
         echo "Error: " . $conn->error;
@@ -62,7 +62,7 @@ if(isset($_POST['agregar'])){
                 <div class="row mb-3">
                     <div class="col">
                         <label for="cuil_cuit">CUIL / CUIT:</label>
-                        <input type="text" class="form-control" name="cuil_cuit" id="cuil_cuit" required maxlength="20" pattern="\d+" title="Por favor, ingrese solo números.">
+                        <input type="text" class="form-control" name="cuil_cuit" id="cuil_cuit" required minlength="10" maxlength="10" pattern="\d+" title="Por favor, ingrese solo números.">
                     </div>
                     <div class="col">
                         <label for="razon_social">Razón Social:</label>
@@ -92,6 +92,7 @@ if(isset($_POST['agregar'])){
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/alertas.js"></script>
 </body>
 
