@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $VALID_USERNAME = "user";
 $VALID_PASSWORD = "1234";
 
@@ -9,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validar credenciales
     if ($username === $VALID_USERNAME && $password === $VALID_PASSWORD) {
+        // Crear la sesión para el usuario
+        $_SESSION['user'] = $username;
         header("Location: index.php");
         exit();
     } elseif ($username === $VALID_USERNAME) {
