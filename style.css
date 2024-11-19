@@ -1,0 +1,122 @@
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1D3557, #457B9D, #A8DADC);
+    color: #F1FAEE;
+}
+
+/*Container*/
+.contenedor {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    width: 350px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.contenedor h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #F1FAEE;
+}
+
+/*Inputs*/
+.input-contenedor {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-contenedor input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    color: #F1FAEE;
+    background: none;
+    border: 2px solid #A8DADC;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-contenedor input:focus {
+    border-color: #F1FAEE;
+}
+
+.input-contenedor label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #A8DADC;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input-contenedor input:focus ~ label,
+.input-contenedor input:valid ~ label {
+    top: -10px;
+    font-size: 0.8rem;
+    color: #F1FAEE;
+}
+
+/*Boton*/
+button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #1D3557;
+    background: #F1FAEE;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #A8DADC;
+    color: #F1FAEE;
+}
+.opciones {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.opciones a {
+    color: #F1FAEE;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.opciones a:hover {
+    color: #A8DADC;
+}
+
+/*Estilos Sweet Alert*/
+.titulo{
+    color: white;
+}
+.texto{
+    color: white !important;
+}
+
+/*Responsive*/
+@media (max-width: 400px) {
+    .contenedor {
+        width: 90%;
+        padding: 20px;
+    }
+}

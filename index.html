@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Credenciales "hardcodeadas"
+        const VALID_USERNAME = "user";
+        const VALID_PASSWORD = "1234";
+
+        // Función para manejar el inicio de sesión
+        function inicioSesion(event) {
+            event.preventDefault(); 
+
+            // Obtener valores ingresados por el usuario
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Verificar las credenciales
+            if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+                Swal.fire({
+                    title: "Inicio de sesion correcto",
+                    html: '<p class="texto">Redirigiendo</p>',
+                    icon: "success",
+                    timer: 2000,
+                    timerProgressBar:true,
+                    background: '#333333',
+                    customClass:{
+                        title: 'titulo',
+                        text: 'hola',
+                    }
+                }).then(() => {
+                window.location.href = 'borrar.html';  // Cambiar url el de la pagina principal, este solo lo puse de prueba
+                });
+            } else if(username === VALID_USERNAME && password !== VALID_PASSWORD) {
+                Swal.fire({
+                    title: "Contraseña incorrecta",
+                    html: '<p class="texto">Vuelve a intentarlo</p>',
+                    icon: "error",
+                    timer: 2000,
+                    timerProgressBar:true,
+                    background: '#333333',
+                    customClass:{
+                        title: 'titulo',
+                        text: 'hola',
+                    }
+                });
+            } else if(username !== VALID_USERNAME && password === VALID_PASSWORD){
+                Swal.fire({
+                    title: "Nombre de usuario incorrecto",
+                    html: '<p class="texto">Vuelve a intentarlo</p>',
+                    icon: "error",
+                    timer: 2000,
+                    timerProgressBar:true,
+                    background: '#333333',
+                    customClass:{
+                        title: 'titulo',
+                        text: 'hola',
+                    }
+                });
+            }else if(username !== VALID_USERNAME && password !== VALID_PASSWORD){
+                Swal.fire({
+                    title: "Inicio de sesion incorrecto",
+                    html: '<p class="texto">Vuelve a intentarlo</p>',
+                    icon: "error",
+                    timer: 2000,
+                    timerProgressBar:true,
+                    background: '#333333',
+                    customClass:{
+                        title: 'titulo',
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+<section>
+    <div class="contenedor">
+        <h2>Bienvenido de nuevo</h2>
+        <form onsubmit="inicioSesion(event)">
+            <div class="input-contenedor">
+                <input type="text" id="username" name="username" required>
+                <label for="username">Usuario</label>
+            </div>
+            <div class="input-contenedor">
+                <input type="password" id="password" name="password" required>
+                <label for="password">Contraseña</label>
+            </div>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+    </div>
+</section>
+<!--Sweet Alert-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
