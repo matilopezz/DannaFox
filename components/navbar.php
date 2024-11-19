@@ -1,13 +1,13 @@
 <header class="header d-flex justify-content-between align-items-center">
     <div class="logo">
-    <a class="navbar-brand" href="/DannaFox/index.php">DannaFox</a>
+        <a class="navbar-brand" href="/DannaFox/index.php">DannaFox</a>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-dark mx-3">
 
         <ul class="d-flex mx-5">
-        <li class="mx-3"><a href="/DannaFox/pages/clientes.php">CLIENTES</a></li>
-        <li><a href="/DannaFox/pages/campanias.php">CAMPAÑAS</a></li>
+            <li class="mx-3"><a href="/DannaFox/pages/clientes.php">CLIENTES</a></li>
+            <li><a href="/DannaFox/pages/campanias.php">CAMPAÑAS</a></li>
         </ul>
 
 
@@ -30,7 +30,7 @@
             </button>
         <?php endif; ?>
 
-        <button class="btn btn-danger">Cerrar Sesión</button>
+        <a href="/DannaFox/components/logout.php" class="btn btn-danger">Cerrar Sesión</a>
     </nav>
 
 </header>

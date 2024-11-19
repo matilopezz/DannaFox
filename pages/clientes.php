@@ -2,6 +2,7 @@
 
 include '..//db/conexion.php'; // Incluir la conexión a la base de datos
 include '..//components/navbar.php';
+include '../auth.php';
 
     $getQuery = "SELECT * FROM clientes";
     $result = $conn->query($getQuery);

@@ -1,6 +1,9 @@
 <?php
 include '..//components/navbar.php';
 include '..//db/conexion.php';
+include '../auth.php';
+
+
     
 if(isset($_POST['agregar'])){
     $nombre = $_POST['nombre'];

@@ -2,7 +2,7 @@
 // campanias.php
 include '..//db/conexion.php'; // Incluir la conexión a la base de datos
 include '..//components/navbar.php';
-
+include '../auth.php';
 
 $sql = "SELECT campania_id, nombre_campania, estado, fecha_inicio FROM campanias";
 $result = $conn->query($sql)

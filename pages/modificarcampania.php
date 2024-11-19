@@ -1,6 +1,8 @@
 <?php
 include '..//db/conexion.php'; 
 include '..//components/navbar.php';
+include '../auth.php';
+
 ?>
 
 <!DOCTYPE html>

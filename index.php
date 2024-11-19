@@ -1,7 +1,9 @@
 <?php
-// index.php
-include 'components/navbar.php'
+include 'components/navbar.php';
+include 'auth.php';
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

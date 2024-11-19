@@ -2,6 +2,9 @@
 // modificarcliente.php
 include '..//components/navbar.php';
 include '..//db/conexion.php';
+include '../auth.php';
+
+
 
 if (isset($_GET['cuil_cuit'])) {
     $cuil_cuit = $_GET['cuil_cuit'];
