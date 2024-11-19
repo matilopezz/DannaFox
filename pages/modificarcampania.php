@@ -184,9 +184,10 @@ include '../auth.php';
                     </div>
                 </div>
 
-                <!-- Botón de Enviar -->
-                <div class="mt-4">
-                    <button type="submit" class="btn-steel-blue btn" name="actualizar">Actualizar Campaña</button>
+                <!-- Botones de Enviar y Cancelar -->
+                <div class="mt-4 mb-5 d-flex justify-content-between">
+                    <button type="submit" class="btn-steel-blue btn" name="actualizar" style="width: 200px;">Actualizar Campaña</button>
+                    <button href="tu-pagina-destino.php" class="btn btn-secondary" style="width: 200px; text-align: center;">Cancelar</button>
                 </div>
             </form>
         </div>
