@@ -23,16 +23,16 @@ include '..//querys/clientes/createCliente.php';
         <div class="d-grid gap-3 col-6 mx-auto mt-5">
             <h3>Información del Cliente:</h3>
 
-            <form method="POST">
+            <form id="formCliente" method="POST">
                 <!-- Nombre y Apellido -->
                 <div class="row mb-3">
                     <div class="col">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre" required maxlength="50" pattern title="Debe ingresar carácteres.">
+                        <input type="text" class="form-control" name="nombre" id="nombre" required maxlength="50"  pattern="[A-Za-z\s]+"  title="Debe ingresar carácteres.">
                     </div>
                     <div class="col">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" class="form-control" name="apellido" id="apellido" required maxlength="50" pattern title="Debe ingresar carácteres.">
+                        <input type="text" class="form-control" name="apellido" id="apellido" required maxlength="50"  pattern="[A-Za-z\s]+" title="Debe ingresar carácteres.">
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@ include '..//querys/clientes/createCliente.php';
                     </div>
                     <div class="col">
                         <label for="razon_social">Razón Social:</label>
-                        <input type="text" class="form-control" name="razon_social" id="razon_social" required maxlength="100" pattern title="Debe ingresar carácteres.">
+                        <input type="text" class="form-control" name="razon_social" id="razon_social" required maxlength="100"  pattern="[A-Za-z\s]+"  title="Debe ingresar carácteres.">
 
                     </div>
                 </div>
@@ -58,6 +58,7 @@ include '..//querys/clientes/createCliente.php';
                     <div class="col">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control" name="email" id="email" required maxlength="100">
+                        <span id="error" style="color: red; display: none;">Correo inválido</span>
                     </div>
                 </div>
 
@@ -72,6 +73,7 @@ include '..//querys/clientes/createCliente.php';
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/alertas.js"></script>
+    <script src="../js/validacionEmailCLiente.js"></script>
 </body>
 
 </html>

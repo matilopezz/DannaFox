@@ -21,12 +21,12 @@ if (isset($_GET['cuil_cuit'])) {
 }
 
 if (isset($_POST['actualizar'])) {
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $razon_social = $_POST['razon_social'];
-    $cuil_cuit = $_POST['cuil_cuit'];
-    $telefono = $_POST['telefono'];
-    $email = $_POST['email'];
+    $nombre = trim($_POST['nombre']);
+    $apellido = trim($_POST['apellido']);
+    $razon_social = trim($_POST['razon_social']);
+    $cuil_cuit = trim($_POST['cuil_cuit']);
+    $telefono = trim($_POST['telefono']);
+    $email = trim($_POST['email']);
 
     $updateQuery = "UPDATE clientes SET nombre = ?, apellido = ?, razon_social = ?, telefono = ?, email = ? WHERE cuil_cuit = ?";
     $stmt = $conn->prepare($updateQuery);

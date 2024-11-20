@@ -8,7 +8,7 @@ if (urlParams.has('success') && urlParams.get('success') === 'true') {
             title: 'Cliente Actualizado',
             text: 'El cliente ha sido actualizado exitosamente.',
             icon: 'success',
-            confirmButtonText: 'Entendido'
+            confirmButtonText: 'OK'
         }).then(() => {
             // Limpia los parámetros de la URL
             window.history.replaceState(null, '', window.location.pathname);
@@ -18,7 +18,7 @@ if (urlParams.has('success') && urlParams.get('success') === 'true') {
             title: 'Cliente Eliminado',
             text: 'El cliente ha sido eliminado exitosamente.',
             icon: 'success',
-            confirmButtonText: 'Entendido'
+            confirmButtonText: 'OK'
         }).then(() => {
             // Limpia los parámetros de la URL
             window.history.replaceState(null, '', window.location.pathname);
@@ -28,7 +28,7 @@ if (urlParams.has('success') && urlParams.get('success') === 'true') {
             title: 'Cliente Añadido',
             text: 'El cliente ha sido añadido exitosamente.',
             icon: 'success',
-            confirmButtonText: 'Entendido'
+            confirmButtonText: 'OK'
         }).then(() => {
             // Limpia los parámetros de la URL
             window.history.replaceState(null, '', window.location.pathname);

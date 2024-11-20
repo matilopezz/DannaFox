@@ -1,12 +1,12 @@
 <?php
    
 if(isset($_POST['agregar'])){
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $razon_social = $_POST['razon_social'];
-    $cuil_cuit = $_POST['cuil_cuit'];
-    $telefono = $_POST['telefono'];
-    $email = $_POST['email'];
+    $nombre = trim($_POST['nombre']);
+    $apellido = trim($_POST['apellido']);
+    $razon_social = trim($_POST['razon_social']);
+    $cuil_cuit = trim($_POST['cuil_cuit']);
+    $telefono = trim($_POST['telefono']);
+    $email = trim($_POST['email']);
     
     $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES (?, ?, ?, ?, ?, ?)";
     
