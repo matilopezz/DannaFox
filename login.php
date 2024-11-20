@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="password" id="password" name="password" required>
                     <label for="password">Contraseña</label>
                 </div>
-                <button type="submit">Iniciar sesión</button>
+                <button type="submit" class="btn-login">Iniciar sesión</button>
             </form>
         </div>
     </section>
