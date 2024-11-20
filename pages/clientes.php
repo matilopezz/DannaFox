@@ -1,30 +1,13 @@
 <?php
 
-include '..//db/conexion.php'; // Incluir la conexión a la base de datos
+include '..//db/conexion.php'; 
 include '..//components/navbar.php';
 include '../auth.php';
-
-    $getQuery = "SELECT * FROM clientes";
-    $result = $conn->query($getQuery);
-
-// ELIMINAR CLIENTE
-
-if (isset($_POST['eliminar'])){
-    $cuil_cuit = $_POST['cuil_cuit'];
-
-    $deleteQuery = "DELETE FROM clientes WHERE cuil_cuit = ? ";
-    $stmt = $conn -> prepare(query:$deleteQuery);
-    $stmt -> bind_param('s', $cuil_cuit);
-
-    if ($stmt -> execute()) {
-        header('Location: clientes.php?success=true&operation=delete');
-        exit;
-    } else {
-        echo "Error al eliminar el cliente: " . $conn->error;
-    }
-}
+include '..//querys/clientes/getCliente.php'; 
+include '..//querys/clientes/deleteCliente.php'; 
 
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 

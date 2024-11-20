@@ -2,10 +2,9 @@
 include '..//db/conexion.php';
 include '..//components/navbar.php';
 include '../auth.php';
-
+include '..//querys/campania/getClienteOption.php';
 //Consulta para obtener el cliente en el OPTION
-$getClientes = "SELECT cliente_id, CONCAT(nombre, ' ', apellido) AS cliente_nombre, cuil_cuit FROM clientes";
-$result = $conn->query($getClientes);
+
 
 // if (isset($_POST['crear_campania'])) {
 

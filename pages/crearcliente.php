@@ -1,31 +1,9 @@
 <?php
-include '..//components/navbar.php';
 include '..//db/conexion.php';
+include '..//components/navbar.php';
 include '../auth.php';
-
-
-    
-if(isset($_POST['agregar'])){
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $razon_social = $_POST['razon_social'];
-    $cuil_cuit = $_POST['cuil_cuit'];
-    $telefono = $_POST['telefono'];
-    $email = $_POST['email'];
-    
-    $insertQuery = "INSERT INTO clientes (nombre, apellido, razon_social, cuil_cuit, telefono, email) VALUES (?, ?, ?, ?, ?, ?)";
-    
-    $stmt = $conn -> prepare($insertQuery);
-    $stmt -> bind_param('ssssss', $nombre, $apellido, $razon_social, $cuil_cuit, $telefono, $email);
-
-    if ($stmt-> execute()){
-        header('Location: crearcliente.php?success=true&operation=create');
-        exit;
-    } else {
-        echo "Error: " . $conn->error;
-    }
-    
-}?>
+include '..//querys/clientes/createCliente.php';
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -50,11 +28,11 @@ if(isset($_POST['agregar'])){
                 <div class="row mb-3">
                     <div class="col">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre" required maxlength="50">
+                        <input type="text" class="form-control" name="nombre" id="nombre" required maxlength="50" pattern title="Debe ingresar carácteres.">
                     </div>
                     <div class="col">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" class="form-control" name="apellido" id="apellido" required maxlength="50">
+                        <input type="text" class="form-control" name="apellido" id="apellido" required maxlength="50" pattern title="Debe ingresar carácteres.">
                     </div>
                 </div>
 
@@ -62,11 +40,11 @@ if(isset($_POST['agregar'])){
                 <div class="row mb-3">
                     <div class="col">
                         <label for="cuil_cuit">CUIL / CUIT:</label>
-                        <input type="text" class="form-control" name="cuil_cuit" id="cuil_cuit" required minlength="10" maxlength="10" pattern="\d+" title="Por favor, ingrese solo números.">
+                        <input type="text" class="form-control" name="cuil_cuit" id="cuil_cuit" required minlength="10" maxlength="10" pattern="\d+" title="Debe ingresar números.">
                     </div>
                     <div class="col">
                         <label for="razon_social">Razón Social:</label>
-                        <input type="text" class="form-control" name="razon_social" id="razon_social" required maxlength="100">
+                        <input type="text" class="form-control" name="razon_social" id="razon_social" required maxlength="100" pattern title="Debe ingresar carácteres.">
 
                     </div>
                 </div>
@@ -75,7 +53,7 @@ if(isset($_POST['agregar'])){
                 <div class="row mb-3">
                     <div class="col">
                         <label for="telefono">Teléfono:</label>
-                        <input type="text" class="form-control" name="telefono" id="telefono" required maxlength="20" pattern="\d+" title="Por favor, ingrese solo números.">
+                        <input type="text" class="form-control" name="telefono" id="telefono" required maxlength="20" pattern="\d+" title="Debe ingresar números.">
                     </div>
                     <div class="col">
                         <label for="email">Email:</label>
