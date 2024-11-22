@@ -1,10 +1,10 @@
 <?php
 
-include '..//db/conexion.php'; 
+include '..//db/conexion.php';
 include '..//components/navbar.php';
 include '../auth.php';
-include '..//querys/clientes/getCliente.php'; 
-include '..//querys/clientes/deleteCliente.php'; 
+include '..//querys/clientes/getCliente.php';
+include '..//querys/clientes/deleteCliente.php';
 
 ?>
 
@@ -23,6 +23,8 @@ include '..//querys/clientes/deleteCliente.php';
     <div class="container d-flex flex-column align-items-center">
         <h2 class="mt-5">LISTA DE CLIENTES:</h2>
         <button class="btn-steel-blue btn mt-4" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
+        <button class="btn btn-primary mt-4" onclick="exportTableToPDF()">Exportar a PDF</button>
+        <button class="btn btn-success mt-4" onclick="exportTableToExcel()">Exportar a Excel</button>
 
         <input type="text" placeholder="Buscar Cliente" id="buscador" class="form-control mt-4">
 
@@ -56,7 +58,7 @@ include '..//querys/clientes/deleteCliente.php';
                                 <input type="hidden" name="cuil_cuit" value="<?php echo $row['cuil_cuit']; ?>">
                                 <button type="submit" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
-                            
+
                             <a href="modificarcliente.php?cuil_cuit=<?php echo $row['cuil_cuit']; ?>" class="ms-3">
                                 <button class="btn btn-primary btn-sm">Modificar</button></a>
 
@@ -70,6 +72,32 @@ include '..//querys/clientes/deleteCliente.php';
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/alertas.js"></script>
     <script src="../js/buscador.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script>
+        function exportTableToPDF() {
+            const {
+                jsPDF
+            } = window.jspdf;
+            const doc = new jsPDF();
+            const table = document.querySelector('table');
+            doc.autoTable({
+                html: table
+            });
+            doc.save('clientes.pdf');
+        }
+
+        function exportTableToExcel() {
+            const table = document.querySelector('table');
+            const wb = XLSX.utils.table_to_book(table, {
+                sheet: "Sheet1"
+            });
+            XLSX.writeFile(wb, 'clientes.xlsx');
+        }
+    </script>
+
 
 </body>
 
