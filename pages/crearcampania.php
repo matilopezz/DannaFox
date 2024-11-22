@@ -134,87 +134,140 @@ include '..//querys/campania/getClienteOption.php';
                 }
                 </script>
 
-                <div class="row mb-3 text-start">
-                    <label>Localidades de destino:</label>
-                </div>
-
-                <!-- Contenedor principal centrado -->
-                <div class="container d-flex justify-content-center">
-                    <!-- Localidades a elegir -->
+                <div class="contenedor-selector-localidades fondo-gris rounded-1 mb-3">
                     <div class="row mb-3">
-                        <!-- Columna 1 -->
-                        <div class="col-md-6 text-start">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="moreno" name="localidades[]" value="Moreno">
-                                <label class="form-check-label" for="moreno">Moreno</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="moron" name="localidades[]" value="Morón">
-                                <label class="form-check-label" for="moron">Morón</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="quilmes" name="localidades[]" value="Quilmes">
-                                <label class="form-check-label" for="quilmes">Quilmes</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="lanus" name="localidades[]" value="Lanús">
-                                <label class="form-check-label" for="lanus">Lanús</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="moreno2" name="localidades[]" value="Moreno">
-                                <label class="form-check-label" for="moreno2">Moreno</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="moron2" name="localidades[]" value="Morón">
-                                <label class="form-check-label" for="moron2">Morón</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="quilmes2" name="localidades[]" value="Quilmes">
-                                <label class="form-check-label" for="quilmes2">Quilmes</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="lanus2" name="localidades[]" value="Lanús">
-                                <label class="form-check-label" for="lanus2">Lanús</label>
-                            </div>
-                        </div>
-                        <!-- Columna 2 -->
-                        <div class="col-md-6 text-start">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="pilar" name="localidades[]" value="Pilar">
-                                <label class="form-check-label" for="pilar">Pilar</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="mar_del_plata" name="localidades[]" value="Mar del Plata">
-                                <label class="form-check-label text-nowrap" for="mar_del_plata">Mar del Plata</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="la_plata" name="localidades[]" value="La Plata">
-                                <label class="form-check-label" for="la_plata">La Plata</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="avellaneda" name="localidades[]" value="Avellaneda">
-                                <label class="form-check-label" for="avellaneda">Avellaneda</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="pilar2" name="localidades[]" value="Pilar">
-                                <label class="form-check-label" for="pilar2">Pilar</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="mar_del_plata2" name="localidades[]" value="Mar del Plata">
-                                <label class="form-check-label text-nowrap" for="mar_del_plata2">Mar del Plata</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="la_plata2" name="localidades[]" value="La Plata">
-                                <label class="form-check-label" for="la_plata2">La Plata</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="avellaneda2" name="localidades[]" value="Avellaneda">
-                                <label class="form-check-label" for="avellaneda2">Avellaneda</label>
-                            </div>
+                        <label>Localidades de destino:</label>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col text-start">
+                            <label for="provinciaInput" class="form-label">Provincia</label>
+                            <select id="provinciaInput" class="form-select" name="provincia" required>
+                                <option value="" disabled selected>Seleccionar provincia...</option>
+                                <option value="Buenos Aires">Buenos Aires</option>
+                                <option value="Córdoba">Córdoba</option>
+                                <option value="Mendoza">Mendoza</option>
+                                <option value="Salta">Salta</option>
+                                <option value="Tucumán">Tucumán</option>
+                            </select>
                         </div>
                     </div>
+
+                    <div class="row mb-3">
+                        <div class="col text-start position-relative">
+                            <label for="ciudadInput" class="form-label">Ciudad</label>
+                            <input 
+                                type="text" 
+                                id="ciudadInput" 
+                                class="form-control" 
+                                placeholder="Seleccionar ciudad..." 
+                                name="ciudades[]" multiple disabled>
+                            <ul id="ciudadesLista" class="list-group position-absolute w-100" style="max-height: 200px; overflow-y: auto; display: none; z-index: 1000;"></ul>
+                        </div>
+                    </div>
+
+                    <div id="ciudadesContainer" class="border rounded p-2 fondo-blanco" style="min-height: 100px;">
+                        <p class="text-muted">No hay ciudades agregadas.</p>
+                    </div>
+
                 </div>
 
+                <script>
+                const ciudadesPorProvincia = {
+                    "Buenos Aires": ["La Plata", "Mar del Plata", "Bahía Blanca", "Tandil", "Olavarría", "Pergamino"],
+                    "Córdoba": ["Córdoba Capital", "Villa Carlos Paz", "Río Cuarto", "San Francisco", "Alta Gracia", "Villa María"],
+                    "Mendoza": ["Mendoza Capital", "San Rafael", "Godoy Cruz", "Luján de Cuyo", "Tunuyán", "Las Heras"],
+                    "Salta": ["Salta Capital", "San Lorenzo", "Cafayate", "Tartagal", "Metán", "Orán"],
+                    "Tucumán": ["San Miguel de Tucumán", "Tafí Viejo", "Yerba Buena", "Concepción", "Lules", "Famaillá"]
+                };
+
+                const provinciaInput = document.getElementById("provinciaInput");
+                const ciudadInput = document.getElementById("ciudadInput");
+                const ciudadesLista = document.getElementById("ciudadesLista");
+                const ciudadesContainer = document.getElementById("ciudadesContainer");
+                let ciudadesSeleccionadas = [];
+
+                // Actualizar las ciudades disponibles cuando se seleccione una provincia
+                provinciaInput.addEventListener("change", () => {
+                    const provinciaSeleccionada = provinciaInput.value;
+
+                    // Habilitar el input de ciudades y resetearlo
+                    ciudadInput.disabled = false;
+                    ciudadInput.value = "";
+                    ciudadesLista.innerHTML = "";
+                    ciudadesLista.style.display = "none";
+                });
+
+                // Mostrar y filtrar la lista al escribir
+                ciudadInput.addEventListener("input", () => {
+                    const filtro = ciudadInput.value.toLowerCase();
+                    const provinciaSeleccionada = provinciaInput.value;
+                    
+                    if (ciudadesPorProvincia[provinciaSeleccionada]) {
+                        const ciudadesFiltradas = ciudadesPorProvincia[provinciaSeleccionada].filter(ciudad =>
+                            ciudad.toLowerCase().includes(filtro)
+                        );
+
+                        // Mostrar y actualizar las opciones
+                        ciudadesLista.innerHTML = "";
+                        ciudadesFiltradas.forEach(ciudad => {
+                            const item = document.createElement("li");
+                            item.className = "list-group-item list-group-item-action";
+                            item.textContent = ciudad;
+                            item.addEventListener("click", () => {
+                                agregarCiudad(ciudad);
+                            });
+                            ciudadesLista.appendChild(item);
+                        });
+
+                        ciudadesLista.style.display = ciudadesFiltradas.length > 0 ? "block" : "none";
+                    }
+                });
+
+                // Agregar ciudad seleccionada
+                function agregarCiudad(ciudad) {
+                    if (!ciudadesSeleccionadas.includes(ciudad)) {
+                        ciudadesSeleccionadas.push(ciudad);
+                        actualizarCiudades();
+                    }
+                    ciudadInput.value = "";
+                    ciudadesLista.style.display = "none";
+                }
+
+                // Actualizar la lista de ciudades seleccionadas
+                function actualizarCiudades() {
+                    ciudadesContainer.innerHTML = "";
+
+                    ciudadesSeleccionadas.forEach((ciudad, index) => {
+                        const ciudadBadge = document.createElement("span");
+                        ciudadBadge.className = "badge bg-primary text-white me-2 mb-2 d-inline-flex align-items-center";
+                        ciudadBadge.innerHTML = `
+                            ${ciudad}
+                            <button type="button" class="btn-close ms-2" aria-label="Eliminar"></button>
+                        `;
+
+                        // Eliminar ciudad al hacer clic en el botón
+                        ciudadBadge.querySelector(".btn-close").addEventListener("click", () => {
+                            ciudadesSeleccionadas.splice(index, 1);
+                            actualizarCiudades();
+                        });
+
+                        ciudadesContainer.appendChild(ciudadBadge);
+                    });
+
+                    // Mostrar mensaje si no hay ciudades seleccionadas
+                    if (ciudadesSeleccionadas.length === 0) {
+                        ciudadesContainer.innerHTML = '<p class="text-muted">No hay ciudades agregadas.</p>';
+                    }
+                }
+
+                // Ocultar la lista si se hace clic fuera
+                document.addEventListener("click", (e) => {
+                    if (!ciudadInput.contains(e.target) && !ciudadesLista.contains(e.target)) {
+                        ciudadesLista.style.display = "none";
+                    }
+                });
+                </script>
 
                 <!-- Estado de la Campaña -->
                 <div class="row mb-3">
@@ -230,7 +283,7 @@ include '..//querys/campania/getClienteOption.php';
                 </div>
 
                 <!-- Botones de Enviar y Cancelar -->
-                <div class="mt-4 mb-5 d-flex justify-content-between">
+                <div class="mt-4 mb-5 d-flex justify-content-center">
                     <button type="submit" class="btn-steel-blue btn" name="crear_campania" style="width: 200px;">Crear Campaña</button>
                 </div>
 
