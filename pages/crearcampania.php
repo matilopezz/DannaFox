@@ -2,46 +2,9 @@
 include '..//db/conexion.php';
 include '..//components/navbar.php';
 include '../auth.php';
-include '..//querys/campania/getClienteOption.php';
-//Consulta para obtener el cliente en el OPTION
-
-
-// if (isset($_POST['crear_campania'])) {
-
-//     $cliente_id = $_POST['cliente']; 
-//     $nombre_campania = $_POST['nombre_campania'];
-//     $fecha_inicio = $_POST['fecha_inicio']; 
-//     $cantidad_mensajes = $_POST['cantidad'];
-//     $texto_SMS = $_POST['sms_text'];
-
-//     $estado = $_POST['estado_campania']; 
-
-//     // Validar que no haya campos vacíos
-//     if (!empty($cliente_id) && !empty($nombre_campana) && !empty($texto_sms)) {
-//         // Preparar la consulta SQL para insertar la campaña
-//         $insertQuery = "INSERT INTO campanias (cliente_id, texto_SMS, nombre_campana, fecha_inicio, estado) 
-//                         VALUES (?, ?, ?, ?, ?)";
-//         $stmt = $conn->prepare($insertQuery);
-
-//         if ($stmt) {
-//             $stmt->bind_param('issss', $cliente_id, $texto_sms, $nombre_campana, $fecha_inicio, $estado);
-
-//             if ($stmt->execute()) {
-//                 // Redirigir a una página de éxito
-//                 header('Location: campanias.php?success=true');
-//                 exit;
-//             } else {
-//                 echo "Error al crear la campaña: " . $stmt->error;
-//             }
-//         } else {
-//             echo "Error al preparar la consulta: " . $conn->error;
-//         }
-//     } else {
-//         echo "Por favor, completa todos los campos.";
-//     }
-// }
-
+include '..//querys/campania/createCampania.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -68,6 +31,7 @@ include '..//querys/campania/getClienteOption.php';
                         <select class="form-control" id="cliente" name="cliente" required>
                             <option value="">Seleccionar cliente</option>
                             <?php
+                            include '..//querys/campania/getClienteOption.php';
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         echo '<option value="' . $row['cliente_id'] . '">' . $row['cliente_nombre'] . ' - '. $row['cuil_cuit'] . '</option>';
@@ -124,15 +88,6 @@ include '..//querys/campania/getClienteOption.php';
                     </div>
                 </div>
 
-                <script>
-                function updateCharacterCount() {
-                    const maxLength = 160;
-                    const smsText = document.getElementById("sms_text");
-                    const charCount = document.getElementById("charCount");
-                    const remaining = maxLength - smsText.value.length;
-                    charCount.textContent = remaining;
-                }
-                </script>
 
                 <div class="contenedor-selector-localidades fondo-gris rounded-1 mb-3">
                     <div class="row mb-3">
@@ -140,29 +95,25 @@ include '..//querys/campania/getClienteOption.php';
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col text-start">
-                            <label for="provinciaInput" class="form-label">Provincia</label>
-                            <select id="provinciaInput" class="form-select" name="provincia" required>
-                                <option value="" disabled selected>Seleccionar provincia...</option>
-                                <option value="Buenos Aires">Buenos Aires</option>
-                                <option value="Córdoba">Córdoba</option>
-                                <option value="Mendoza">Mendoza</option>
-                                <option value="Salta">Salta</option>
-                                <option value="Tucumán">Tucumán</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
                         <div class="col text-start position-relative">
                             <label for="ciudadInput" class="form-label">Ciudad</label>
-                            <input 
-                                type="text" 
-                                id="ciudadInput" 
-                                class="form-control" 
-                                placeholder="Seleccionar ciudad..." 
-                                name="ciudades[]" multiple disabled>
-                            <ul id="ciudadesLista" class="list-group position-absolute w-100" style="max-height: 200px; overflow-y: auto; display: none; z-index: 1000;"></ul>
+                            <select class="form-control" id="ciudadOption" name="localidades" required>
+                                <option value="">Seleccionar localidad</option>
+
+                                <?php
+                                    include '..//querys/campania/getLocalidades.php';
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo '<option value="' . $row['localidad_id'] . '">' . $row['localidad'] . '</option>';
+                                        }
+                                    } else {
+                                        echo '<option value="">No hay localidades disponibles</option>';
+                                    }
+                                ?>
+
+                            </select>
+                            <ul id="ciudadesSeleccionadas" class="list-group position-absolute w-100" style="max-height: 200px; overflow-y: auto; display: none; z-index: 1000;"></ul>
+
                         </div>
                     </div>
 
@@ -172,102 +123,6 @@ include '..//querys/campania/getClienteOption.php';
 
                 </div>
 
-                <script>
-                const ciudadesPorProvincia = {
-                    "Buenos Aires": ["La Plata", "Mar del Plata", "Bahía Blanca", "Tandil", "Olavarría", "Pergamino"],
-                    "Córdoba": ["Córdoba Capital", "Villa Carlos Paz", "Río Cuarto", "San Francisco", "Alta Gracia", "Villa María"],
-                    "Mendoza": ["Mendoza Capital", "San Rafael", "Godoy Cruz", "Luján de Cuyo", "Tunuyán", "Las Heras"],
-                    "Salta": ["Salta Capital", "San Lorenzo", "Cafayate", "Tartagal", "Metán", "Orán"],
-                    "Tucumán": ["San Miguel de Tucumán", "Tafí Viejo", "Yerba Buena", "Concepción", "Lules", "Famaillá"]
-                };
-
-                const provinciaInput = document.getElementById("provinciaInput");
-                const ciudadInput = document.getElementById("ciudadInput");
-                const ciudadesLista = document.getElementById("ciudadesLista");
-                const ciudadesContainer = document.getElementById("ciudadesContainer");
-                let ciudadesSeleccionadas = [];
-
-                // Actualizar las ciudades disponibles cuando se seleccione una provincia
-                provinciaInput.addEventListener("change", () => {
-                    const provinciaSeleccionada = provinciaInput.value;
-
-                    // Habilitar el input de ciudades y resetearlo
-                    ciudadInput.disabled = false;
-                    ciudadInput.value = "";
-                    ciudadesLista.innerHTML = "";
-                    ciudadesLista.style.display = "none";
-                });
-
-                // Mostrar y filtrar la lista al escribir
-                ciudadInput.addEventListener("input", () => {
-                    const filtro = ciudadInput.value.toLowerCase();
-                    const provinciaSeleccionada = provinciaInput.value;
-                    
-                    if (ciudadesPorProvincia[provinciaSeleccionada]) {
-                        const ciudadesFiltradas = ciudadesPorProvincia[provinciaSeleccionada].filter(ciudad =>
-                            ciudad.toLowerCase().includes(filtro)
-                        );
-
-                        // Mostrar y actualizar las opciones
-                        ciudadesLista.innerHTML = "";
-                        ciudadesFiltradas.forEach(ciudad => {
-                            const item = document.createElement("li");
-                            item.className = "list-group-item list-group-item-action";
-                            item.textContent = ciudad;
-                            item.addEventListener("click", () => {
-                                agregarCiudad(ciudad);
-                            });
-                            ciudadesLista.appendChild(item);
-                        });
-
-                        ciudadesLista.style.display = ciudadesFiltradas.length > 0 ? "block" : "none";
-                    }
-                });
-
-                // Agregar ciudad seleccionada
-                function agregarCiudad(ciudad) {
-                    if (!ciudadesSeleccionadas.includes(ciudad)) {
-                        ciudadesSeleccionadas.push(ciudad);
-                        actualizarCiudades();
-                    }
-                    ciudadInput.value = "";
-                    ciudadesLista.style.display = "none";
-                }
-
-                // Actualizar la lista de ciudades seleccionadas
-                function actualizarCiudades() {
-                    ciudadesContainer.innerHTML = "";
-
-                    ciudadesSeleccionadas.forEach((ciudad, index) => {
-                        const ciudadBadge = document.createElement("span");
-                        ciudadBadge.className = "badge bg-primary text-white me-2 mb-2 d-inline-flex align-items-center";
-                        ciudadBadge.innerHTML = `
-                            ${ciudad}
-                            <button type="button" class="btn-close ms-2" aria-label="Eliminar"></button>
-                        `;
-
-                        // Eliminar ciudad al hacer clic en el botón
-                        ciudadBadge.querySelector(".btn-close").addEventListener("click", () => {
-                            ciudadesSeleccionadas.splice(index, 1);
-                            actualizarCiudades();
-                        });
-
-                        ciudadesContainer.appendChild(ciudadBadge);
-                    });
-
-                    // Mostrar mensaje si no hay ciudades seleccionadas
-                    if (ciudadesSeleccionadas.length === 0) {
-                        ciudadesContainer.innerHTML = '<p class="text-muted">No hay ciudades agregadas.</p>';
-                    }
-                }
-
-                // Ocultar la lista si se hace clic fuera
-                document.addEventListener("click", (e) => {
-                    if (!ciudadInput.contains(e.target) && !ciudadesLista.contains(e.target)) {
-                        ciudadesLista.style.display = "none";
-                    }
-                });
-                </script>
 
                 <!-- Estado de la Campaña -->
                 <div class="row mb-3">
@@ -290,6 +145,10 @@ include '..//querys/campania/getClienteOption.php';
             </form>
         </div>
     </div>
+
+<script src="../js/localidades.js"></script>
+<script src="../js/contadorCaracteres.js"></script>
+
 </body>
 
 </html>

@@ -8,6 +8,17 @@
   --text-color: white;
   --btn-danger-text-color: #000001;
 }
+/* Contenedor de las ciudades */
+#ciudadesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Espacio entre los elementos */
+  padding: 10px;
+  background-color: #f8f9fa; /* Fondo del contenedor */
+  border: 1px solid #ddd; /* Borde del contenedor */
+  border-radius: 8px; /* Borde redondeado */
+  min-height: 100px; /* Altura mínima */
+}
 
 .header {
   background-color: var(--head-background-color);
