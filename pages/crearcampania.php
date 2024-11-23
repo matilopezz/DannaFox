@@ -97,8 +97,8 @@ include '..//querys/campania/createCampania.php';
                     <div class="row mb-3">
                         <div class="col text-start position-relative">
                             <label for="ciudadInput" class="form-label">Ciudad</label>
-                            <select class="form-control" id="ciudadOption" name="localidades" required>
-                                <option value="">Seleccionar localidad</option>
+                            <select class="form-control" id="ciudadOption" name="localidades[]" multiple required>
+                            <option value="">Seleccionar localidad</option>
 
                                 <?php
                                     include '..//querys/campania/getLocalidades.php';
