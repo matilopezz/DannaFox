@@ -49,8 +49,8 @@ $result = $conn->query($sql)
                         echo "<td>" . $row['estado'] . "</td>";
                         echo "<td>" . $row['fecha_inicio'] . "</td>";
                         echo "<td>
-                                <button class='btn btn-info btn-sm'>✏️</button>
-                                <button class='btn btn-danger btn-sm'>🗑️</button>
+                                <button class='btn btn-info btn-sm' onclick='modificarCampania(" . $row['campania_id'] . ")'>✏️</button>
+                                <button class='btn btn-danger btn-sm' onclick='borrarCampania(" . $row['campania_id'] . ")'>🗑️</button>
                               </td>";
                         echo "</tr>";
                     }
@@ -84,6 +84,29 @@ $result = $conn->query($sql)
                 sheet: "Sheet1"
             });
             XLSX.writeFile(wb, 'campañas.xlsx');
+        }
+
+        function modificarCampania(id) {
+            window.location.href = 'modificarcampania.php?id=' + id;
+        }
+
+        function borrarCampania(id) {
+            if (confirm('¿Estás seguro de que deseas borrar esta campaña?')) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "../querys/campania/borrar_campania.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            document.getElementById('row_' + id).remove();
+                        } else {
+                            alert('Error al borrar la campaña.');
+                        }
+                    }
+                };
+                xhr.send("id=" + id);
+            }
         }
     </script>
 
