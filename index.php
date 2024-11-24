@@ -18,8 +18,8 @@ include 'auth.php';
 
     <!-- Contenido principal -->
     <div class="container text-center mt-5">
-        <h2>MENU</h2>
-        <hr class="my-4" style="width: 50%; margin: auto;">
+    <h2 class="mt-5" style="color: black;; font-size: 60px;">MENÚ</h2>
+    <hr class="my-4" style="width: 50%; margin: auto;">
 
         <div class="d-grid gap-3 col-6 mx-auto mt-5">
             <a href="pages/clientes.php" class="btn-steel-blue btn btn-lg">GESTIONAR CLIENTES</a>

@@ -19,8 +19,10 @@ include '..//querys/campania/createCampania.php';
 <body>
     <div class="container text-center mt-5">
         <h2>CREAR CAMPAÑA PUBLICITARIA</h2>
+        <hr class="my-4 " style="width: 50%; margin: auto;">
+
         <div class="d-grid gap-3 col-6 mx-auto mt-5">
-            <h4>Información de la campaña publicitaria:</h4>
+        <h4 class="" style="color: #4A90E2;">Información de la campaña publicitaria:</h4>
 
             <!-- Formulario -->
             <form method="POST">

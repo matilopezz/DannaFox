@@ -20,10 +20,13 @@ include '..//querys/clientes/createCliente.php';
 
     <div class="container text-center mt-5">
         <h2>AÑADIR CLIENTE</h2>
+        <hr class="my-4 " style="width: 50%; margin: auto;">
         <div class="d-grid gap-3 col-6 mx-auto mt-5">
-            <h3>Información del Cliente:</h3>
+       
 
-            <form id="formCliente" method="POST">
+        <h4 class="" style="color: #4A90E2;">Información del cliente:</h4>
+
+            <form class="mt-5" id="formCliente" method="POST">
                 <!-- Nombre y Apellido -->
                 <div class="row mb-3">
                     <div class="col">
