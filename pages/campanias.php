@@ -45,7 +45,7 @@ $result = $conn->query($sql)
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row['nombre_campania'] . "</td>";
-                        echo "<td>" . $row['nombre_campania'] . "</td>"; 
+                        echo "<td>" . $row['campania_id'] . "</td>"; 
                         echo "<td>" . $row['estado'] . "</td>";
                         echo "<td>" . $row['fecha_inicio'] . "</td>";
                         echo "<td>
