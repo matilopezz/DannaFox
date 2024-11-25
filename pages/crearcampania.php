@@ -81,8 +81,8 @@ include '..//querys/campania/createCampania.php';
                 <!-- Texto a enviar por SMS -->
                 <div class="row mb-3">
                     <div class="col">
-                        <label for="sms_text">Texto a enviar por SMS:</label>
-                        <textarea class="form-control" id="sms_text" name="sms_text" rows="4" maxlength="160" oninput="updateCharacterCount()"></textarea>
+                        <label for="texto_SMS">Texto a enviar por SMS:</label>
+                        <textarea class="form-control" id="texto_SMS" name="texto_SMS" rows="4" maxlength="160" oninput="updateCharacterCount()"></textarea>
                         <div class="d-flex justify-content-between">
                             <small class="form-text text-muted">Máximo: 160 caracteres</small>
                             <small class="form-text text-muted">Te quedan <span id="charCount">160</span> caracteres</small>
