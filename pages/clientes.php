@@ -20,14 +20,17 @@ include '..//querys/clientes/deleteCliente.php';
 </head>
 
 <body>
-    <div class="container d-flex flex-column align-items-center">
-        <h2 class="mt-5">LISTA DE CLIENTES:</h2>
-        <button class="btn-steel-blue btn mt-4" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
-        <button class="btn btn-primary mt-4" onclick="exportTableToPDF()">Exportar a PDF</button>
-        <button class="btn btn-success mt-4" onclick="exportTableToExcel()">Exportar a Excel</button>
+    <div class="container">
+        <h2 class="mt-5 text-center" style="color: black;; font-size: 40px;">LISTA DE CLIENTES:</h2>
+        <hr class="my-4" style="width: 50%; margin: auto;">
 
-        <input type="text" placeholder="Buscar Cliente" id="buscador" class="form-control mt-4">
-
+        
+        <!-- Fila para botón y buscador -->
+         <div class="mt-5">
+        <div class="d-flex justify-content-between align-items-center mt-4 w-100">
+            <button class="btn-steel-blue btn" onclick="window.location.href='crearcliente.php'">Añadir Cliente</button>
+            <input type="text" placeholder="Buscar Cliente" id="buscador" class="form-control" style="width: 300px;">
+        </div>
 
         <table class="table table-bordered pt-3 mt-4">
             <thead>
@@ -60,13 +63,20 @@ include '..//querys/clientes/deleteCliente.php';
                             </form>
 
                             <a href="modificarcliente.php?cuil_cuit=<?php echo $row['cuil_cuit']; ?>" class="ms-3">
-                                <button class="btn btn-primary btn-sm">Modificar</button></a>
-
+                                <button class="btn btn-primary btn-sm">Modificar</button>
+                            </a>
                         </td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
+
+        <!-- Botones debajo de la tabla -->
+        <div class="d-flex justify-content-start w-100 mt-4">
+            <button class="btn btn-primary me-2" onclick="exportTableToPDF()">Exportar a PDF</button>
+            <button class="btn btn-success" onclick="exportTableToExcel()">Exportar a Excel</button>
+        </div>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -78,9 +88,7 @@ include '..//querys/clientes/deleteCliente.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script>
         function exportTableToPDF() {
-            const {
-                jsPDF
-            } = window.jspdf;
+            const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const table = document.querySelector('table');
             doc.autoTable({
@@ -98,12 +106,6 @@ include '..//querys/clientes/deleteCliente.php';
         }
     </script>
 
-
 </body>
 
 </html>
-
-<?php
-// Cerrar la conexión (no es estrictamente necesario con PDO, ya que se cierra automáticamente)
-$pdo = null;
-?>

@@ -14,14 +14,27 @@ if (urlParams.has('success') && urlParams.get('success') === 'true') {
             window.history.replaceState(null, '', window.location.pathname);
         });
     }else if(operacion === 'delete'){
+        
         Swal.fire({
-            title: 'Cliente Eliminado',
-            text: 'El cliente ha sido eliminado exitosamente.',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            // Limpia los parámetros de la URL
-            window.history.replaceState(null, '', window.location.pathname);
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esta acción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Cliente Eliminado',
+                    text: 'El cliente ha sido eliminado exitosamente.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    // Limpia los parámetros de la URL
+                    window.history.replaceState(null, '', window.location.pathname);
+                });
+            }
         });
     }else if(operacion === 'create'){
         Swal.fire({
@@ -34,9 +47,9 @@ if (urlParams.has('success') && urlParams.get('success') === 'true') {
             window.history.replaceState(null, '', window.location.pathname);
         });
     }
-
-
 }
+
+
 
 
 
