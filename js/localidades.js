@@ -39,6 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 ciudadesContainer.appendChild(ciudadItem);
             });
         }
+
+        // Actualizar el campo oculto con las localidades seleccionadas
+        localidadesInput.value = JSON.stringify(ciudadesSeleccionadas.map(c => c.id));
     }
 
     // Selección de ciudades
