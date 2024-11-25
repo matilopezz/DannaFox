@@ -127,11 +127,11 @@ include '..//querys/campania/createCampania.php';
                 <!-- Estado de la Campaña -->
                 <div class="row mb-3">
                     <div class="col text-start">
-                        <label for="estado_campaña">Estado de la Campaña:</label>
-                        <select class="form-control" id="estado_campania" name="estado_campania" required>
+                        <label for="estado">Estado de la Campaña:</label>
+                        <select class="form-control" id="estado" name="estado" required>
                             <option value="">Seleccionar</option>
                             <option value="Creada">Creada</option>
-                            <option value="En ejecución">En ejecución</option>
+                            <option value="Ejecutandose">Ejecutandose</option>
                             <option value="Finalizada">Finalizada</option>
                         </select>
                     </div>

@@ -6,7 +6,7 @@
         $localidad_id = implode(',' , $_POST['localidades']);  // Convierte el array en una cadena separada por comas
         $cantidad_mensajes = intval($_POST['cantidad']);
         $nombre_campania = trim($_POST['nombre_campania']);
-        $estado = trim($_POST['estado_campania']);
+        $estado = trim($_POST['estado']);
         $fecha_inicio = trim($_POST['fecha_inicio']);
 
         
