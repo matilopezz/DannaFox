@@ -35,7 +35,7 @@ include '../auth.php';
                         <th>ID</th>
                         <th>Nombre Campaña</th>
                         <th>Nombre cliente</th>
-                        <th>Localidad</th>
+                        <th>Localidad(es)</th>
                         <th>Estado</th>
                         <th>Fecha de Inicio</th>
                         <th>Acciones</th>
@@ -68,8 +68,8 @@ include '../auth.php';
             </table>
 
             <div class="d-flex justify-content-start w-100 mt-4">
-                <button class="btn btn-primary me-2" onclick="exportTableToPDF()">Exportar a PDF</button>
-                <button class="btn btn-success" onclick="exportTableToExcel()">Exportar a Excel</button>
+                <button class="btn btn-primary me-2 mb-2" onclick="exportTableToPDF()">Exportar a PDF</button>
+                <button class="btn btn-success mb-2" onclick="exportTableToExcel()">Exportar a Excel</button>
             </div>
         </div>
     </div>
@@ -83,22 +83,54 @@ include '../auth.php';
     
     <script>
         function exportTableToPDF() {
-            const {
-                jsPDF
-            } = window.jspdf;
+            const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const table = document.querySelector('table');
+
+            // Definir las columnas a incluir (puedes hacerlo por índice de las columnas)
+            const columns = Array.from(table.querySelectorAll('th')).map(th => th.textContent);
+
+            // Eliminar la columna que deseas excluir, por ejemplo, la columna con índice 1
+            const columnIndexToExclude = 6;
+            const filteredColumns = columns.filter((_, index) => index !== columnIndexToExclude);
+
+            // Crear una tabla para autoTable sin la columna excluida
             doc.autoTable({
-                html: table
+                head: [filteredColumns], // Usamos las columnas filtradas
+                body: Array.from(table.querySelectorAll('tr')).map(row => {
+                    return Array.from(row.children).filter((_, index) => index !== columnIndexToExclude)
+                        .map(cell => cell.textContent);
+                })
             });
+
+            // Guardar el PDF generado
             doc.save('campañas.pdf');
         }
 
         function exportTableToExcel() {
             const table = document.querySelector('table');
-            const wb = XLSX.utils.table_to_book(table, {
-                sheet: "Sheet1"
+            // Obtener los encabezados de la tabla (si están dentro de <thead>)
+            const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent);
+            // Eliminar la columna que deseas excluir, por ejemplo, la columna con índice 1
+            const columnIndexToExclude = 6;
+            // Filtrar las filas del <tbody> para excluir la columna
+            const rows = Array.from(table.querySelectorAll('tbody tr')).map(row => {
+                return Array.from(row.children).filter((_, index) => index !== columnIndexToExclude)
+                    .map(cell => cell.textContent);
             });
+            // Filtrar los encabezados también para excluir la columna
+            const filteredHeaders = headers.filter((_, index) => index !== columnIndexToExclude);
+            // Filtrar las filas para excluir la columna
+            const filteredRows = rows.map(row => row.filter((_, index) => index !== columnIndexToExclude));
+            // Crear una nueva tabla con los datos filtrados (encabezados + filas)
+            const filteredTable = [filteredHeaders, ...filteredRows];
+            // Crear un libro nuevo
+            const wb = XLSX.utils.book_new();
+            // Convertir el array de arrays (AOA) en una hoja
+            const ws = XLSX.utils.aoa_to_sheet(filteredTable);
+            // Añadir la hoja al libro
+            XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+            // Escribir el archivo Excel
             XLSX.writeFile(wb, 'campañas.xlsx');
         }
 

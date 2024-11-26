@@ -18,6 +18,18 @@
   border: 1px solid #ddd; /* Borde del contenedor */
   border-radius: 8px; /* Borde redondeado */
   min-height: 100px; /* Altura mínima */
+  position: relative; /* Hace que el contenedor de ciudades seleccionadas esté detrás de la lista */
+  z-index: 500; /* Menor que el de la lista de localidades */
+  margin-top: 210px; /* Asegura que la caja de seleccionados no se solape con la lista */
+}
+
+#ciudadList {
+  z-index: 1000 !important;; /* Asegura que la lista de localidades esté por encima de otros elementos */
+  position: absolute !important;;
+  max-height: 200px !important;;
+  overflow-y: auto !important;;
+  width: calc(100% - 24px) !important;
+  background-color: white !important;;  /* Para que tenga un fondo blanco y no se mezcle con otros elementos */
 }
 
 .header {
@@ -235,6 +247,8 @@ section {
 .texto {
   color: var(--text-color) !important;
 }
+
+
 
 /*Responsive*/
 @media (max-width: 400px) {

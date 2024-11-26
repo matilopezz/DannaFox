@@ -1,4 +1,5 @@
-const ciudadOption = document.getElementById('ciudadOption');
+const ciudadInput = document.getElementById('ciudadInput');
+const ciudadList = document.getElementById('ciudadList');
 const ciudadesContainer = document.getElementById('ciudadesContainer');
 const seleccionadas = new Set(); // Para evitar duplicados
 const LIMITE_LOCALIDADES = 10;
@@ -31,34 +32,49 @@ function updateLocalidadesInput() {
     });
 }
 
-// Agregar las localidades seleccionadas al contenedor
-ciudadOption.addEventListener('change', () => {
-    const selectedOptions = Array.from(ciudadOption.selectedOptions);
+// Función para manejar la búsqueda de localidades
+ciudadInput.addEventListener('input', function() {
+    const filter = ciudadInput.value.toLowerCase();
+    const items = ciudadList.getElementsByTagName('li');
 
-    selectedOptions.forEach(option => {
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const text = item.textContent || item.innerText;
+        if (text.toLowerCase().indexOf(filter) > -1) {
+            item.style.display = "";
+        } else {
+            item.style.display = "none";
+        }
+    }
+});
+
+// Manejar la selección de localidades
+ciudadList.addEventListener('click', function(e) {
+    if (e.target && e.target.matches('.localidad-item')) {
+        const localidadId = e.target.getAttribute('data-id');
+        const localidadText = e.target.textContent;
+
         // Verificar si ya hemos alcanzado el límite de 10 localidades
         if (seleccionadas.size >= LIMITE_LOCALIDADES) {
             alert('Ya has alcanzado el límite de 10 localidades.');
-            ciudadOption.value = Array.from(seleccionadas); // Restaurar el valor de las opciones seleccionadas
             return;
         }
 
-        
-        if (!seleccionadas.has(option.value) && option.value !== "") {
-            seleccionadas.add(option.value);
+        if (!seleccionadas.has(localidadId)) {
+            seleccionadas.add(localidadId);
 
             // Crear un elemento visual en la caja
             const ciudadDiv = document.createElement('div');
             ciudadDiv.className = 'badge bg-primary text-white m-1';
             ciudadDiv.style.height = 'min-content';
-            ciudadDiv.textContent = option.text;
+            ciudadDiv.textContent = localidadText;
 
             // Botón para eliminar
             const removeBtn = document.createElement('button');
             removeBtn.className = 'btn-close btn-close-white ms-2';
             removeBtn.style.fontSize = '0.8rem';
             removeBtn.addEventListener('click', () => {
-                seleccionadas.delete(option.value);
+                seleccionadas.delete(localidadId);
                 ciudadDiv.remove();
                 updateLocalidadesInput();
                 updateCantidad(); // Actualizar la cantidad al eliminar
@@ -74,16 +90,11 @@ ciudadOption.addEventListener('change', () => {
             updateLocalidadesInput();
             updateCantidad();
         }
-    });
-
-    // Mostrar mensaje vacío si no hay localidades seleccionadas
-    if (seleccionadas.size > 0) {
-        ciudadesContainer.querySelector('p')?.remove();
     }
 });
 
 // Añadir un evento de envío para asegurarse de que el campo oculto de localidades se actualiza al enviar el formulario
-const formulario = document.querySelector('form'); // Obtén el formulario
+const formulario = document.querySelector('form');
 formulario.addEventListener('submit', function(e) {
     // Actualizar las localidades antes de enviar
     updateLocalidadesInput();

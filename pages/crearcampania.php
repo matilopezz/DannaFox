@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DannaFox - Nueva Campaña</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../styles/stylesheet.css">
+        <link rel="stylesheet" href="../styles/stylesheet.css?v=1.0">
     </head>
 
     <body>
@@ -91,38 +91,38 @@
                     </div>
 
 
-                    <div class="contenedor-selector-localidades fondo-gris rounded-1 mb-3">
-                        <div class="row mb-3">
-                            <label>Localidades de destino:</label>
-                        </div>
+                        <div class="contenedor-selector-localidades fondo-gris rounded-1 mb-3">
+                            <div class="row mb-3">
+                                <label>Localidades de destino:</label>
+                            </div>
 
-                        <div class="row mb-3">
-                            <div class="col text-start position-relative">
-                                <label for="ciudadInput" class="form-label">Ciudad</label>
-                                <select class="form-control" id="ciudadOption" multiple>
-                                    <option value="">Seleccionar localidad</option>
-                                    <?php
-                                    include '..//querys/campania/getLocalidades.php';
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo '<option value="' . $row['localidad_id'] . '">' . $row['localidad'] . '</option>';
+                            <div class="row mb-3">
+                                <div class="col text-start position-relative">
+                                    
+                                    <!-- Barra de búsqueda -->
+                                    <input type="text" id="ciudadInput" class="form-control" placeholder="Buscar localidad...">
+                                    <!-- Lista desordenada -->
+                                    <ul id="ciudadList" class="list-group position-absolute w-100" style="max-height: 200px; overflow-y: auto; z-index: 1000;">
+                                        <li class="list-group-item disabled">Selecciona una o más localidades</li>
+                                        <?php
+                                        include '..//querys/campania/getLocalidades.php';
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo '<li class="list-group-item localidad-item" data-id="' . $row['localidad_id'] . '">' . $row['localidad'] . '</li>';
+                                            }
+                                        } else {
+                                            echo '<li class="list-group-item disabled">No hay localidades disponibles</li>';
                                         }
-                                    } else {
-                                        echo '<option value="">No hay localidades disponibles</option>';
-                                    }
-                                    ?>
-                                </select>
-                                <ul id="ciudadesSeleccionadas" class="list-group position-absolute w-100" style="max-height: 200px; overflow-y: auto; display: none; z-index: 1000;"></ul>
+                                        ?>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div id="localidadesSeleccionadas"></div>
+                            <div id="ciudadesContainer" class="border rounded p-2 fondo-blanco" style="min-height: 100px;">
+                                
                             </div>
                         </div>
-
-                        <div id="localidadesSeleccionadas"></div>
-                        <div id="ciudadesContainer" class="border rounded p-2 fondo-blanco" style="min-height: 100px;">
-                            <p class="text-muted">No hay ciudades agregadas.</p>
-                        </div>
-
-                    </div>
-
 
                     <!-- Estado de la Campaña -->
                     <!-- <div class="row mb-3">
@@ -146,7 +146,6 @@
                             <p id="cantidadMensajes" class="form-text text-muted">Cantidad de mensajes que se enviarán (7000 por localidad): 0</p>
                         </div>
                     </div>
-
 
                     <!-- Botones de Enviar y Cancelar -->
                     <div class="mt-4 mb-5 d-flex justify-content-center">
