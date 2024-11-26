@@ -51,6 +51,9 @@
                         <div class="col text-start">
                             <label for="nombre_campaña">Nombre de la campaña:</label>
                             <input type="text" class="form-control" id="nombre_campania" name="nombre_campania" required>
+                            <?php if (isset($error_campania)) { ?>
+                            <span id="campaniaError" style="color: red;"><?php echo $error_campania; ?></span>
+                        <?php } ?>
                         </div>
                     </div>
 
