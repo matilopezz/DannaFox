@@ -4,8 +4,6 @@ include '..//db/conexion.php'; // Incluir la conexión a la base de datos
 include '..//components/navbar.php';
 include '../auth.php';
 
-$sql = "SELECT campania_id, nombre_campania, estado, fecha_inicio FROM campanias";
-$result = $conn->query($sql)
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -34,8 +32,10 @@ $result = $conn->query($sql)
             <table class="table table-bordered mt-4" id="tablaCampanias">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Campaña</th>
+                        <th>ID</th>
+                        <th>Nombre Campaña</th>
+                        <th>Nombre cliente</th>
+                        <th>Localidad</th>
                         <th>Estado</th>
                         <th>Fecha de Inicio</th>
                         <th>Acciones</th>
@@ -43,11 +43,15 @@ $result = $conn->query($sql)
                 </thead>
                 <tbody>
                     <?php
+                    
+                    include '..//querys/campania/getCampanias.php';
+                    
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            echo "<tr id='row_" . $row['campania_id'] . "'>";
-                            echo "<td>" . $row['nombre_campania'] . "</td>";
                             echo "<td>" . $row['campania_id'] . "</td>";
+                            echo "<td>" . $row['nombre_campania'] . "</td>";
+                            echo "<td>" . $row['nombre_cliente'] . " ".$row['apellido_cliente']. "</td>";
+                            echo "<td>" . $row['nombre_localidad'] . "</td>"; //va localidad
                             echo "<td>" . $row['estado'] . "</td>";
                             echo "<td>" . $row['fecha_inicio'] . "</td>";
                             echo "<td>
