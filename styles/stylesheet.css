@@ -2,10 +2,13 @@
   --head-background-color: #217aa0;
   --btn-steel-blue-color: #217aa0;
   --btn-steel-blue-hover-color: #186383;
+  --btn-yellow-color: #ffc268;
+  --btn-yellow-hover-color: #f38d4a;
   --teal-green-color: #a8dadc;
   --btn-back-primary-color: #4f847c;
   --btn-back-hover-color: #3b6b5e;
   --text-color: white;
+  --btn-yellow-text-color: #000;
   --btn-danger-text-color: #000001;
 }
 /* Contenedor de las ciudades */
@@ -188,9 +191,31 @@ section {
   color: var(--text-color);
 }
 
+.btn-yellow{
+  background-color: var(--btn-yellow-color);
+  color: var(--btn-yellow-text-color);
+}
+
+.btn-yellow:hover{
+  background-color: var(--btn-yellow-hover-color);
+  color: var(--btn-yellow-text-color);
+}
+
 .btn-steel-blue:hover {
   background-color: var(--btn-steel-blue-hover-color);
   color: var(--text-color);
+}
+
+.yellow-text{
+  color: var(--btn-yellow-color);
+}
+
+.logo-text:hover{
+  color: #a8dadc;
+}
+
+.logo-text:hover > .yellow-text{
+  color: var(--btn-yellow-hover-color);
 }
 
 .btn-back {

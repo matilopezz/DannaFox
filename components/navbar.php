@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DannaFox</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/stylesheet.css?v=1.0">
     <style>
         .btn-steel-blue {
             background-color: #4682B4; /* Color steel blue */
@@ -46,14 +47,14 @@
     ?>
     <header class="header">
         <?php if (mostrarBotonVolver()): ?>
-            <button onclick="history.back()" class="btn btn-back btn-sm" style="margin-left: 20px;">Volver atrás</button>
+            <button onclick="history.back()" class="btn btn-yellow  btn-sm" style="margin-left: 20px;">Volver atrás</button>
         <?php endif; ?>
 
         <div class="logo">
-        <a class="navbar-brand" href="/DannaFox/index.php">DannaFox</a>
+        <a class="navbar-brand" href="/DannaFox/index.php"><span class="logo-text"><span class="yellow-text">D</span>anna<span class="yellow-text">F</span>ox</span></a>
         </div>
 
-        <nav class="navbar navbar-dark bg-dark">
+        <nav class="navbar navbar-dark">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <!-- menú -->
                 <div class="dropdown">

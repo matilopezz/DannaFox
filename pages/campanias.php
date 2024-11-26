@@ -13,7 +13,7 @@ include '../auth.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DannaFox - Campañas</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../styles/stylesheet.css">
+    <link rel="stylesheet" href="../styles/stylesheet.css?v=1.0">
 </head>
 
 <body>
@@ -55,8 +55,8 @@ include '../auth.php';
                             echo "<td>" . $row['estado'] . "</td>";
                             echo "<td>" . $row['fecha_inicio'] . "</td>";
                             echo "<td>
-                            <button class='btn btn-info btn-sm' onclick='modificarCampania(" . $row['campania_id'] . ")'>✏️</button>
-                            <button class='btn btn-danger btn-sm' onclick='borrarCampania(" . $row['campania_id'] . ")'>🗑️</button>
+                            <button class='btn btn-steel-blue btn-sm' onclick='modificarCampania(" . $row['campania_id'] . ")'>✏️</button>
+                            <button class='btn btn-yellow btn-sm' onclick='borrarCampania(" . $row['campania_id'] . ")'>🗑️</button>
                           </td>";
                             echo "</tr>";
                         }
@@ -68,8 +68,8 @@ include '../auth.php';
             </table>
 
             <div class="d-flex justify-content-start w-100 mt-4">
-                <button class="btn btn-primary me-2 mb-2" onclick="exportTableToPDF()">Exportar a PDF</button>
-                <button class="btn btn-success mb-2" onclick="exportTableToExcel()">Exportar a Excel</button>
+                <button class="btn btn-yellow me-2 mb-2" onclick="exportTableToPDF()">Exportar a PDF</button>
+                <button class="btn btn-steel-blue mb-2" onclick="exportTableToExcel()">Exportar a Excel</button>
             </div>
         </div>
     </div>

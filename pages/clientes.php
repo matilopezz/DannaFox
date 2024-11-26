@@ -16,7 +16,7 @@ include '..//querys/clientes/deleteCliente.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DannaFox - Clientes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../styles/stylesheet.css">
+    <link rel="stylesheet" href="../styles/stylesheet.css?v=1.0">
 </head>
 
 <body>
@@ -59,11 +59,11 @@ include '..//querys/clientes/deleteCliente.php';
                             <!-- Botón para eliminar cliente -->
                             <form method="POST">
                                 <input type="hidden" name="cuil_cuit" value="<?php echo $row['cuil_cuit']; ?>">
-                                <button type="submit" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button>
+                                <button type="submit" name="eliminar" class="btn btn-yellow btn-sm">Eliminar</button>
                             </form>
 
                             <a href="modificarcliente.php?cuil_cuit=<?php echo $row['cuil_cuit']; ?>" class="ms-3">
-                                <button class="btn btn-primary btn-sm">Modificar</button>
+                                <button class="btn btn-steel-blue btn-sm">Modificar</button>
                             </a>
                         </td>
                     </tr>
@@ -73,8 +73,8 @@ include '..//querys/clientes/deleteCliente.php';
 
         <!-- Botones debajo de la tabla -->
         <div class="d-flex justify-content-start w-100 mt-4">
-            <button class="btn btn-primary me-2" onclick="exportTableToPDF()">Exportar a PDF</button>
-            <button class="btn btn-success" onclick="exportTableToExcel()">Exportar a Excel</button>
+            <button class="btn btn-yellow me-2" onclick="exportTableToPDF()">Exportar a PDF</button>
+            <button class="btn btn-steel-blue" onclick="exportTableToExcel()">Exportar a Excel</button>
         </div>
     </div>
     </div>
