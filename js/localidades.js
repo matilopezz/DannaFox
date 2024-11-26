@@ -1,68 +1,50 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const ciudadOption = document.getElementById("ciudadOption");
-    const ciudadesContainer = document.getElementById("ciudadesContainer");
-    const ciudadesSeleccionadas = []; // Array para almacenar las ciudades seleccionadas
 
-    function actualizarContenedor() {
-        // Limpia el contenedor
-        ciudadesContainer.innerHTML = '';
+    const ciudadOption = document.getElementById('ciudadOption');
+    const ciudadesContainer = document.getElementById('ciudadesContainer');
+    const localidadesSeleccionadas = document.getElementById('localidadesSeleccionadas');
+    const seleccionadas = new Set(); // Para evitar duplicados
 
-        if (ciudadesSeleccionadas.length === 0) {
-            // Muestra el mensaje por defecto si no hay ciudades
-            const mensaje = document.createElement('p');
-            mensaje.className = 'text-muted';
-            mensaje.textContent = 'No hay ciudades agregadas.';
-            ciudadesContainer.appendChild(mensaje);
-        } else {
-            // Muestra las ciudades seleccionadas
-            ciudadesSeleccionadas.forEach((ciudad, index) => {
-                const ciudadItem = document.createElement('div');
-                ciudadItem.className = "badge bg-primary text-white me-1 mb-1 d-inline-flex align-items-center";
-                ciudadItem.style.height = "30px";
-                
-                // Nombre de la ciudad
-                const nombre = document.createElement('span');
-                nombre.textContent = ciudad.nombre;
+    ciudadOption.addEventListener('change', () => {
+        const selectedOptions = Array.from(ciudadOption.selectedOptions);
 
-                // Botón para eliminar la ciudad
-                const eliminarBtn = document.createElement('button');
-                eliminarBtn.className = 'btn-close ms-1';
-                
-                eliminarBtn.addEventListener('click', function () {
-                    // Elimina la ciudad del array
-                    ciudadesSeleccionadas.splice(index, 1);
-                    actualizarContenedor();
+        selectedOptions.forEach(option => {
+            if (!seleccionadas.has(option.value) && option.value !== "") {
+                seleccionadas.add(option.value);
+
+                // Crear un elemento visual en la caja
+                const ciudadDiv = document.createElement('div');
+                ciudadDiv.className = 'badge bg-primary text-white m-1';
+                ciudadDiv.style.height = 'min-content';
+                ciudadDiv.textContent = option.text;
+
+                // Botón para eliminar
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'btn-close btn-close-white ms-2';
+                removeBtn.style.fontSize = '0.8rem';
+                removeBtn.addEventListener('click', () => {
+                    seleccionadas.delete(option.value);
+                    ciudadDiv.remove();
+                    updateLocalidadesInput();
+                    if (seleccionadas.size === 0) {
+                        ciudadesContainer.innerHTML = '<p class="text-muted">No hay ciudades agregadas.</p>';
+                    }
                 });
 
-                ciudadItem.appendChild(nombre);
-                ciudadItem.appendChild(eliminarBtn);
-                ciudadesContainer.appendChild(ciudadItem);
-            });
+                ciudadDiv.appendChild(removeBtn);
+                ciudadesContainer.appendChild(ciudadDiv);
+
+                // Actualizar input hidden
+                updateLocalidadesInput();
+            }
+        });
+
+        // Mostrar mensaje vacío si no hay localidades seleccionadas
+        if (seleccionadas.size > 0) {
+            ciudadesContainer.querySelector('p')?.remove();
         }
-
-        // Actualizar el campo oculto con las localidades seleccionadas
-        localidadesInput.value = JSON.stringify(ciudadesSeleccionadas.map(c => c.id));
-    }
-
-    // Selección de ciudades
-    ciudadOption.addEventListener("change", function () {
-        const selectedOption = ciudadOption.options[ciudadOption.selectedIndex];
-        const id = selectedOption.value;
-        const nombre = selectedOption.textContent;
-
-        // Evita duplicados y selecciones vacías
-        if (!id || ciudadesSeleccionadas.some(c => c.id === id)) {
-            return
-        }
-
-        // Agrega la ciudad al array
-        ciudadesSeleccionadas.push({ id, nombre });
-        actualizarContenedor();
-
-        // Resetea el select
-        ciudadOption.selectedIndex = 0;
     });
 
-    // Inicializa el contenedor con el mensaje por defecto
-    actualizarContenedor();
-});
+    // Actualizar el campo hidden con las localidades seleccionadas
+    function updateLocalidadesInput() {
+        localidadesSeleccionadas.value = Array.from(seleccionadas).join(',');
+    }

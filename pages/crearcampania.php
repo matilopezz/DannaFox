@@ -99,26 +99,24 @@ include '..//querys/campania/createCampania.php';
                     <div class="row mb-3">
                         <div class="col text-start position-relative">
                             <label for="ciudadInput" class="form-label">Ciudad</label>
-                            <select class="form-control" id="ciudadOption" name="localidades[]" multiple required>
-                            <option value="">Seleccionar localidad</option>
-
+                            <select class="form-control" id="ciudadOption" multiple required>
+                                <option value="">Seleccionar localidad</option>
                                 <?php
-                                    include '..//querys/campania/getLocalidades.php';
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo '<option value="' . $row['localidad_id'] . '">' . $row['localidad'] . '</option>';
-                                        }
-                                    } else {
-                                        echo '<option value="">No hay localidades disponibles</option>';
+                                include '..//querys/campania/getLocalidades.php';
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<option value="' . $row['localidad_id'] . '">' . $row['localidad'] . '</option>';
                                     }
+                                } else {
+                                    echo '<option value="">No hay localidades disponibles</option>';
+                                }
                                 ?>
-
                             </select>
                             <ul id="ciudadesSeleccionadas" class="list-group position-absolute w-100" style="max-height: 200px; overflow-y: auto; display: none; z-index: 1000;"></ul>
-
                         </div>
                     </div>
 
+                    <input type="hidden" id="localidadesSeleccionadas" name="campania_localidades">
                     <div id="ciudadesContainer" class="border rounded p-2 fondo-blanco" style="min-height: 100px;">
                         <p class="text-muted">No hay ciudades agregadas.</p>
                     </div>
@@ -150,6 +148,14 @@ include '..//querys/campania/createCampania.php';
 
 <script src="../js/localidades.js"></script>
 <script src="../js/contadorCaracteres.js"></script>
+
+<script>
+    const formulario = document.querySelector('form'); // Obtén el formulario
+    formulario.addEventListener('submit', function(e) {
+        // Actualizar el campo oculto antes de enviar el formulario
+        updateLocalidadesInput();
+    });
+</script>
 
 </body>
 
