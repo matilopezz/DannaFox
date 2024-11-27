@@ -3,6 +3,8 @@
 include '..//db/conexion.php'; // Incluir la conexión a la base de datos
 include '..//components/navbar.php';
 include '../auth.php';
+include '../querys/campania/validar_campanias.php';
+
 
 ?>
 <!DOCTYPE html>
@@ -21,10 +23,20 @@ include '../auth.php';
         <h2 class="mt-5 text-center" style="color: black;; font-size: 40px;">LISTA DE CAMPAÑAS:</h2>
         <hr class="my-4" style="width: 50%; margin: auto;">
 
+        <?php if (!$mostrarBotonCampanias): ?>
+            <div class="alert alert-warning text-center mt-3">
+            No se pueden añadir más campañas porque se ha alcanzado el límite permitido.
+            </div>
+        <?php endif; ?>
+
         <!-- Fila para el botón y el buscador -->
         <div class="mt-5">
             <div class="d-flex justify-content-between align-items-center  w-100">
+            <?php if ($mostrarBotonCampanias): ?>
                 <button class="btn-steel-blue btn" onclick="window.location.href='crearcampania.php'">Añadir Campaña</button>
+            <?php else: ?>
+                <button class="btn btn-secondary btn-disabled" disabled>No se pueden añadir más campañas</button>
+            <?php endif; ?>
                 <input type="text" placeholder="Buscar campaña por nombre" id="buscador" class="form-control" style="width: 300px;">
             </div>
 
