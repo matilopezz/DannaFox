@@ -1,5 +1,5 @@
 <?php
-include '../db/conexion.php'; 
+include '../db/conexion.php';
 include '../components/navbar.php';
 include '../auth.php';
 
@@ -38,11 +38,12 @@ if (isset($_GET["id"])) {
     $stmt->fetch();
     $stmt->close();
     $conn->close();
-} 
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +51,7 @@ if (isset($_GET["id"])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../styles/stylesheet.css?v=1.0">
 </head>
+
 <body>
     <div class="container text-center mt-5">
         <h2>ACTUALIZAR CAMPAÑA PUBLICITARIA</h2>
@@ -58,12 +60,12 @@ if (isset($_GET["id"])) {
 
             <!-- Formulario -->
             <form action="modificarcampania.php" method="POST">
-                <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <!-- Texto SMS -->
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars($id, ENT_QUOTES, 'UTF-8'); ?>"> 
                 <div class="row mb-3">
                     <div class="col text-start">
                         <label for="texto_sms">Texto SMS:</label>
-                        <textarea class="form-control" id="texto_sms" name="texto_sms" rows="4" required><?php echo $texto_sms; ?></textarea>
+                        <textarea class="form-control" id="texto_sms" name="texto_sms" rows="4" maxlength="160"><?php echo htmlspecialchars($texto_sms, ENT_QUOTES, 'UTF-8'); ?></textarea>
                     </div>
                 </div>
                 <!-- Estado -->
@@ -71,9 +73,9 @@ if (isset($_GET["id"])) {
                     <div class="col text-start">
                         <label for="estado">Estado:</label>
                         <select class="form-control" id="estado" name="estado" required>
-                            <option value="creada" <?php if ($estado == 'creada') echo 'selected'; ?>>creada</option>
-                            <option value="ejecucion" <?php if ($estado == 'ejecucion') echo 'selected'; ?>>ejecucion</option>
-                            <option value="finalizada" <?php if ($estado == 'finalizada') echo 'selected'; ?>>finalizada</option>
+                            <option value="Creada" <?php if ($estado == 'Creada') echo 'selected'; ?>>Creada</option>
+                            <option value="Ejecucion" <?php if ($estado == 'Ejecucion') echo 'selected'; ?>>Ejecucion</option>
+                            <option value="Finalizada" <?php if ($estado == 'Finalizada') echo 'selected'; ?>>Finalizada</option>
 
                         </select>
                     </div>
@@ -83,4 +85,5 @@ if (isset($_GET["id"])) {
         </div>
     </div>
 </body>
+
 </html>
