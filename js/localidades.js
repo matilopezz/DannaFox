@@ -6,7 +6,7 @@ const LIMITE_LOCALIDADES = 10;
 
 // Actualizar la cantidad de mensajes al cambiar las ciudades seleccionadas
 function updateCantidad() {
-    const cantidadMensajes = seleccionadas.size * 7000;
+    const cantidadMensajes = 7000; //seleccionadas.size * 7000;
     document.getElementById('cantidad').value = cantidadMensajes;
     
     // Opcional: muestra la cantidad de mensajes en la interfaz

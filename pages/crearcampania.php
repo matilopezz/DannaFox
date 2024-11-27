@@ -146,7 +146,7 @@
                     <input type="hidden" id="cantidad" name="cantidad" value="0">
                     <div class="row mb-3">
                         <div class="col">
-                            <p id="cantidadMensajes" class="form-text text-muted">Cantidad de mensajes que se enviarán (7000 por localidad): 0</p>
+                            <p id="cantidadMensajes" class="form-text text-muted">Cantidad de mensajes que se enviarán: 0</p>
                         </div>
                     </div>
 
