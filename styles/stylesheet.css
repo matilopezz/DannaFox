@@ -1,15 +1,21 @@
 :root {
   --head-background-color: #217aa0;
   --btn-steel-blue-color: #217aa0;
+  --background-color: #f8f9fa;
+  --container-background-color: rgba(255, 255, 255, 0.1);
+  --border-color: #dddddd;
+  --danger-color: #d9534f;
   --btn-steel-blue-hover-color: #186383;
   --btn-yellow-color: #ffc268;
   --btn-yellow-hover-color: #f38d4a;
   --teal-green-color: #a8dadc;
   --btn-back-primary-color: #4f847c;
   --btn-back-hover-color: #3b6b5e;
-  --text-color: white;
+  --text-color: #ffffff;
+  --black-text-color: #000000;
   --btn-yellow-text-color: #000;
   --btn-danger-text-color: #000001;
+  --shadow: rgba(0, 0, 0, 0.3);
 }
 /* Contenedor de las ciudades */
 #ciudadesContainer {
@@ -17,8 +23,8 @@
   flex-wrap: wrap;
   gap: 10px; /* Espacio entre los elementos */
   padding: 10px;
-  background-color: #f8f9fa; /* Fondo del contenedor */
-  border: 1px solid #ddd; /* Borde del contenedor */
+  background-color: var(--background-color); /* Fondo del contenedor */
+  border: 1px solid var(--border-color); /* Borde del contenedor */
   border-radius: 8px; /* Borde redondeado */
   min-height: 100px; /* Altura mínima */
   position: relative; /* Hace que el contenedor de ciudades seleccionadas esté detrás de la lista */
@@ -27,12 +33,12 @@
 }
 
 #ciudadList {
-  z-index: 1000 !important;; /* Asegura que la lista de localidades esté por encima de otros elementos */
-  position: absolute !important;;
-  max-height: 200px !important;;
-  overflow-y: auto !important;;
+  z-index: 1000 !important; /* Asegura que la lista de localidades esté por encima de otros elementos */
+  position: absolute !important;
+  max-height: 200px !important;
+  overflow-y: auto !important;
   width: calc(100% - 24px) !important;
-  background-color: white !important;;  /* Para que tenga un fondo blanco y no se mezcle con otros elementos */
+  background-color: var(--background-color) !important; /* Para que tenga un fondo blanco y no se mezcle con otros elementos */
 }
 
 .header {
@@ -42,14 +48,14 @@
   align-items: center;
 }
 
-.fondo-gris{
-  background-color: #f5f5f5;
-  border: 2px solid #d6d6d6;
+.fondo-gris {
+  background-color: var(--background-color);
+  border: 2px solid var(--border-color);
   padding: 10px;
 }
 
-.fondo-blanco{
-  background-color: white;
+.fondo-blanco {
+  background-color: var(--background-color);
 }
 
 .custom-navbar {
@@ -112,12 +118,12 @@ section {
 
 /*Container*/
 .contenedor {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--container-background-color);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 30px;
   width: 350px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px var(--shadow);
   text-align: center;
 }
 
@@ -174,7 +180,7 @@ section {
   font-size: 1rem;
   font-weight: bold;
   color: #1d3557;
-  background: #f1faee;
+  background: var(--background-color);
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -182,8 +188,8 @@ section {
 }
 
 .btn-login:hover {
-  background: #a8dadc;
-  color: #f1faee;
+  background: var(--teal-green-color);
+  color: var(--background-color);
 }
 
 .btn-steel-blue {
@@ -191,30 +197,45 @@ section {
   color: var(--text-color);
 }
 
-.btn-yellow{
-  background-color: var(--btn-yellow-color);
-  color: var(--btn-yellow-text-color);
-}
-
-.btn-yellow:hover{
-  background-color: var(--btn-yellow-hover-color);
-  color: var(--btn-yellow-text-color);
-}
-
 .btn-steel-blue:hover {
   background-color: var(--btn-steel-blue-hover-color);
   color: var(--text-color);
 }
 
-.yellow-text{
+/* Estilo del menú desplegable */
+.dropdown-menu {
+  background-color: var(--background-color); /* Fondo blanco */
+  border: 1px solid var(--border-color); /* Borde tenue */
+}
+
+/* Botones dentro del menú (Clientes, Campañas) */
+.dropdown-item {
+  color: var(--black-text-color); /* Texto negro */
+}
+
+/* Estilo del botón "Cerrar Sesión" */
+.dropdown-item.text-danger {
+  color: var(--danger-color); /* Texto rojo por defecto */
+}
+.btn-yellow {
+  background-color: var(--btn-yellow-color);
+  color: var(--btn-yellow-text-color);
+}
+
+.btn-yellow:hover {
+  background-color: var(--btn-yellow-hover-color);
+  color: var(--btn-yellow-text-color);
+}
+
+.yellow-text {
   color: var(--btn-yellow-color);
 }
 
-.logo-text:hover{
+.logo-text:hover {
   color: #a8dadc;
 }
 
-.logo-text:hover > .yellow-text{
+.logo-text:hover > .yellow-text {
   color: var(--btn-yellow-hover-color);
 }
 
@@ -231,7 +252,7 @@ section {
 
 .btn-back:hover {
   background-color: var(--btn-back-hover-color);
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px var(--shadow);
 }
 
 .btn-danger {
@@ -246,7 +267,7 @@ section {
 
 .btn-danger:hover {
   color: var(--btn-danger-text-color);
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px var(--shadow);
 }
 .opciones {
   margin-top: 20px;
@@ -273,8 +294,6 @@ section {
   color: var(--text-color) !important;
 }
 
-
-
 /*Responsive*/
 @media (max-width: 400px) {
   .contenedor {
@@ -282,4 +301,3 @@ section {
     padding: 20px;
   }
 }
-
